@@ -2,7 +2,7 @@
 My home page for all websites and repos
 
 # Youtube
-`https://youtube.com/@wolfdreamMusique`
+`https://youtube.com/@wolfdream226`
 
-# WDB chatbot models
-`https://wolfdreamyt.github.i/wdb`
+# Instagram
+`https://instagram.com/@wolfdream226`
