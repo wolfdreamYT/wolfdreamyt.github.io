@@ -5,4 +5,4 @@ My home page for all websites and repos
 `https://youtube.com/@wolfdream226`
 
 # Instagram
-`https://instagram.com/@wolfdream226`
+`https://instagram.com/wolfdream226`
