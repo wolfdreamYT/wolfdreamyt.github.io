@@ -1,0 +1,8 @@
+
+# Run this command when on school wifi:
+
+cloudflared tunnel run --protocol http2
+
+# run this command when on home wifi:
+
+cloudflared tunnel run wolfsite
