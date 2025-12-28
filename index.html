@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Wolf Studios — Home</title>
+    <meta name="description" content="Wolf Studios — Inventing like animals." />
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root{
+        --liquid-1:#a9f8ff; 
+        --liquid-2:#c391ff;
+        --liquid-3:#ff9ff8;
+      }
+      .glass-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px)}
+    </style>
+  </head>
+  <body class="min-h-screen bg-neutral-900 text-slate-100 antialiased">
+    <header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg brand-logo"><img src="logo.png"></div>
+
+        <div>
+          <div class="font-semibold text-lg">Wolf Studios</div>
+          <div class="text-xs text-slate-400 -mt-0.5">Inventing products like animals.</div>
+        </div>
+      </div>
+
+      <nav id="main-nav" class="hidden md:flex gap-6 items-center text-slate-300">
+        <a href="#products" class="hover:text-white">Products</a>
+        <a href="/media" target="_blank" class="hover:text-white">Media</a>
+        <a href="#features" class="hover:text-white">Features</a>
+        <a href="/webbot" class="hover:text-white">WebBot</a>
+        <a href="https://mail.google.com/mail/u/0/#inbox?compose=DmwnWrRtsVtwSNvJMQHVxLpjNmFscrkCcXFWtLqcNjXFppGLXhvlVDrpxtKNldFxFGcWGFLjWdLg" class="hover:text-white" target="_blank">Support</a>
+        <a href="https://github.com/wolfdreamYT/contribute-public" target="_blank">
+          <button class="ml-4 px-4 py-2 rounded-md bg-white text-neutral-900 font-medium">Contribute</button>
+        </a>
+      </nav>
+
+      <div class="md:hidden">
+        <button id="menuBtn" class="px-3 py-2 border rounded-md text-slate-300 border-slate-700">Menu</button>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6">
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center py-20">
+        <div>
+          <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">Wolf Studios official homepage.</h1>
+          <p class="mt-6 text-lg text-slate-300 max-w-xl">We make music, software, and more with wolf studios. We have innovated before, but invention is more our style.</p>
+
+          <div class="mt-8 flex gap-4">
+            <a href="#products" class="inline-flex items-center gap-3 px-6 py-3 rounded-full" style="background:linear-gradient(90deg,var(--liquid-1),var(--liquid-2));color:#071022;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.6)">Explore Products</a>
+            <a href="#webbot" class="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-slate-700 text-slate-200">Learn About WebBot</a>
+          </div>
+
+          <div class="mt-8 text-sm text-slate-500">Music released globally • Spotify, Youtube, and more.</div>
+        </div>
+
+        <div class="relative">
+          <div class="w-full h-80 md:h-96 rounded-2xl overflow-hidden" style="background:linear-gradient(180deg,#111827,#0b1220);box-shadow:0 40px 80px rgba(2,6,23,0.7);display:flex;align-items:center;justify-content:center;">
+            <img src="poster1.png" alt="Preview" class="w-full h-full object-cover rounded-2xl" />
+            <div class="absolute bottom-6 left-6 bg-black/40 p-3 rounded-md text-sm text-slate-300">
+               Official Wolf Studios Banner
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="products" class="py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <div class="rounded-2xl p-6 glass-card border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/40">
+            <div class="text-xl font-semibold">WebBot - V3</div>
+            <div class="mt-2 text-slate-400">Professional web scanner bot, made for researchers.</div>
+            <div class="mt-6"><a href="webbot.html" class="text-sm font-medium text-slate-200">Learn More →</a></div>
+          </div>
+
+          <div class="rounded-2xl p-6 glass-card border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/40">
+            <div class="text-xl font-semibold">The Office 93'</div>
+            <div class="mt-2 text-slate-400">Realistic Horror game, with disturbing background story.</div>
+            <div class="mt-6"><a href="https://drive.google.com/file/d/1pKJStD0ECsRo86WDcXuA70W9GfTA_71g/view?usp=sharing" target="_blank" class="text-sm font-medium text-slate-200">Learn More →</a></div>
+          </div>
+
+          <div class="rounded-2xl p-6 glass-card border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/40">
+            <div class="text-xl font-semibold">UniDDoS</div>
+            <div class="mt-2 text-slate-400">A DDoS software made for hackers, feared by corps.</div>
+            <div class="mt-6"><a href="https://github.com/wolfdreamYT/UniDDoS" target="_blank" class="text-sm font-medium text-slate-200">Learn More →</a></div>
+          </div>
+
+          <div class="rounded-2xl p-6 glass-card border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/40">
+            <div class="text-xl font-semibold">Chicago 66'</div>
+            <div class="mt-2 text-slate-400">A very cheesy 90s-like game, very intense, and there is no escape...</div>
+            <div class="mt-6"><a href="https://github.com/wolfdreamYT/wolf-shooter" target="_blank" class="text-sm font-medium text-slate-200">Learn More →</a></div>
+          </div>
+
+          <div class="rounded-2xl p-6 glass-card border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/40">
+            <div class="text-xl font-semibold">Wolf LIVE</div>
+            <div class="mt-2 text-slate-400">A Server hosting UI app, made for hosting node.js files easily.</div>
+            <div class="mt-6"><a href="https://github.com/wolfdreamYT/WOLF-LIVE" target="_blank" class="text-sm font-medium text-slate-200">Learn More →</a></div>
+          </div>
+          <div class="rounded-2xl p-6 glass-card border border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/40">
+            <div class="text-xl font-semibold">Device Puller Pro</div>
+            <div class="mt-2 text-slate-400">an advanced code to give you info about a specified IP address, loved by hackers.</div>
+            <div class="mt-6"><a href="https://github.com/wolfdreamYT/Device-Puller-Pro" target="_blank" class="text-sm font-medium text-slate-200">Learn More →</a></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="webbot" class="mt-6 rounded-3xl overflow-hidden" style="background:linear-gradient(90deg,#0f172a,#0b1220);border:1px solid rgba(100,116,139,0.12);padding:2rem;display:flex;flex-direction:column;gap:1.25rem;">
+        <div style="flex:1;">
+          <h3 class="text-2xl font-bold">Meet WebBot - V3</h3>
+          <p class="mt-2 text-slate-300 max-w-xl">A lightweight but advanced, web-based crawling assistant that helps you scan, index, and extract content from the web - without editing anything. Try it in your browser. No install required. 2X faster and stronger than 2.0, and 4X faster and stronger than 1.0.</p>
+
+          <div class="mt-4 flex gap-3">
+            <a href="webbot.html" class="inline-flex items-center gap-3 px-5 py-3 rounded-full" style="background:linear-gradient(90deg,var(--liquid-1),var(--liquid-3));color:#071022;font-weight:600">Try Now</a>
+            <a class="inline-flex items-center gap-3 px-4 py-3 rounded-full border border-slate-700 text-slate-300" href="https://github.com/wolfdreamYT/webbot/wiki" target="_blank">Docs</a>
+          </div>
+
+          <div class="mt-4 text-xs text-slate-500">Beta version available • Limited concurrent scans • API access coming soon</div>
+        </div>
+
+        <div class="w-full md:w-96">
+          <div class="rounded-xl p-4 border" style="background:linear-gradient(180deg,#081123,#071022);border:1px solid rgba(100,116,139,0.06)">
+            <div class="text-xs text-slate-400">Server Demo</div>
+            <pre class="mt-3 bg-neutral-900 rounded-md p-3 text-xs text-slate-200 font-mono h-44 overflow-auto"> * Serving Flask app 'server'
+ * Debug mode: off
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.0.0.87:5000
+
+</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-slate-800/40 border border-slate-700">
+            <div class="font-semibold">Polished UI</div>
+            <div class="mt-2 text-slate-400">Minimal, tactile, and fast - designed for flow.</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-slate-800/40 border border-slate-700">
+            <div class="font-semibold">Performance</div>
+            <div class="mt-2 text-slate-400">3050 GPU - 16GB RAM - Super Speed</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-slate-800/40 border border-slate-700">
+            <div class="font-semibold">Privacy</div>
+            <div class="mt-2 text-slate-400">Files deleted after 2 hours to ensure storage is unlimited. No one can see what you scan, even authorities.</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="mt-16 py-10 border-t border-slate-800 text-slate-400">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <div class="font-semibold text-white">Wolf Studios</div>
+            <div class="text-xs">© <span id="year"></span> Wolf Studios - Created by Nicholas Machan.</div>
+          </div>
+
+          <div class="flex gap-6 text-sm">
+            <a href="#features">Privacy</a>
+            <a href="https://mail.google.com/mail/u/0/#inbox?compose=DmwnWrRtsVtwSNvJMQHVxLpjNmFscrkCcXFWtLqcNjXFppGLXhvlVDrpxtKNldFxFGcWGFLjWdLg">Contact</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+      const menuBtn = document.getElementById('menuBtn');
+      menuBtn && menuBtn.addEventListener('click',() => {
+        const nav = document.getElementById('main-nav');
+        if(nav.classList.contains('hidden')) nav.classList.remove('hidden'); else nav.classList.add('hidden');
+      });
+    </script>
+        <script>
+        const POLL_INTERVAL = 1000; 
+        const RESOURCE_URL = window.location.href; 
+
+        async function checkServer() {
+        try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 1500);
+
+            const response = await fetch(RESOURCE_URL, { cache: 'no-store', signal: controller.signal });
+            clearTimeout(timeout);
+
+            if (!response.ok) throw new Error('Non-OK response'); 
+        } catch (err) {
+            console.warn('Server unreachable, refreshing page...');
+            location.reload(); 
+        }
+        }
+
+        setInterval(checkServer, POLL_INTERVAL);
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

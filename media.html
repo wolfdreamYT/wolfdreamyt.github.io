@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WolfStudios — Media</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="icon.ico" type="image/x-icon">
+  <style>
+    :root{--glass: rgba(255,255,255,0.06);--muted: rgba(255,255,255,0.55)}
+    body{background:linear-gradient(180deg,#0f172a 0%, #071031 100%);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
+    .video-card{backdrop-filter: blur(6px);background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
+    .placeholder-img{display:grid;place-items:center;font-weight:600}
+    .aspect-16-9{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+    .aspect-16-9 iframe, .aspect-16-9 img{position:absolute;top:0;left:0;width:100%;height:100%;}
+  </style>
+</head>
+<body class="min-h-screen text-white">
+  <header class="max-w-7xl mx-auto p-4 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-slate-900"><img src="logo.png"></div>
+      <div>
+        <h1 class="text-xl font-semibold">wolfstudios</h1>
+        <p class="text-sm text-slate-300">Media Page</p>
+      </div>
+    </div>
+    <nav class="flex items-center gap-3">
+    </nav>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-4">
+    <section class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
+      <div class="col-span-1 sm:col-span-2 lg:col-span-3 flex gap-3">
+      </div>
+    </section>
+
+    <section id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></section>
+  </main>
+
+  <footer class="max-w-7xl mx-auto p-4 text-center text-slate-400 text-sm">© wolfstudios</footer>
+
+  <script>
+    const initialVideos = [
+        'GUh33fiM0yw', 
+        'ZUlFsSFpJyY', 
+        'sZUcabinuRw', 
+        'X9fNbmWlauI', 
+        'lJZtWg0bUiE',
+        '3tGgOejb96k',
+        'KM4Fch10Yek',
+        'B-6xunFK5no',
+        '5iPQiQrwnig',
+        '9G-oHmjOG2U',
+        'T8haqsJrA00',
+        'Yf-fT51wVoQ',
+        'p_wpy3pXyeI',
+        'OkAkuC5slG0',
+        'Uxtf5-5oxDo',
+        'UJ6QJyMJE38',
+        'd6zq3Re-8DI'
+    ];
+
+    const gallery = document.getElementById('gallery');
+    const addBtn = document.getElementById('addVideo');
+    const videoUrlInput = document.getElementById('videoUrl');
+    const loadAllBtn = document.getElementById('loadAll');
+    const clearAllBtn = document.getElementById('clearAll');
+
+    async function fetchVideoData(videoId){
+      try{
+        const res = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+        const data = await res.json();
+        return {
+          title: data.title,
+          author: data.author_name,
+          views: '—',
+          publishedAt: '—'
+        };
+      }catch(e){
+        return {title: `Video — ${videoId}`, author: '', views: '—', publishedAt: '—'};
+      }
+    }
+
+    function timeAgo(dateStr){
+      if(dateStr === '—') return 'Unknown';
+      const seconds = Math.floor((new Date() - new Date(dateStr)) / 1000);
+      let interval = Math.floor(seconds / 31536000);
+      if(interval >= 1) return interval + ' year' + (interval>1?'s':'') + ' ago';
+      interval = Math.floor(seconds / 2592000);
+      if(interval >=1) return interval + ' month' + (interval>1?'s':'') + ' ago';
+      interval = Math.floor(seconds / 86400);
+      if(interval >=1) return interval + ' day' + (interval>1?'s':'') + ' ago';
+      interval = Math.floor(seconds / 3600);
+      if(interval >=1) return interval + ' hour' + (interval>1?'s':'') + ' ago';
+      interval = Math.floor(seconds / 60);
+      if(interval >=1) return interval + ' minute' + (interval>1?'s':'') + ' ago';
+      return 'Just now';
+    }
+
+    async function makeCard(videoId){
+      const data = await fetchVideoData(videoId);
+      const card = document.createElement('article');
+      card.className = 'video-card rounded-2xl overflow-hidden shadow-lg border border-white/3';
+
+      const media = document.createElement('div');
+      media.className = 'aspect-16-9 placeholder-img cursor-pointer bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800';
+      media.setAttribute('data-video-id', videoId);
+
+      const thumb = document.createElement('img');
+      thumb.alt = data.title;
+      thumb.loading = 'lazy';
+      thumb.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+
+      const play = document.createElement('div');
+      play.className = 'absolute inset-0 grid place-items-center';
+      play.innerHTML = `<div class="p-3 rounded-full bg-white/10 backdrop-blur text-white"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-8 w-8\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M14.752 11.168l-5.197-3.06A1 1 0 008 8.94v6.12a1 1 0 001.555.832l5.197-3.06a1 1 0 000-1.696z\"/></svg></div>`;
+
+      media.appendChild(thumb);
+      media.appendChild(play);
+
+      const meta = document.createElement('div');
+      meta.className = 'p-3';
+      const titleEl = document.createElement('h3');
+      titleEl.className = 'font-semibold truncate';
+      titleEl.textContent = data.title;
+
+      const sub = document.createElement('p');
+      sub.className = 'text-sm text-slate-300 mt-1 truncate';
+      sub.textContent = `Channel: ${data.author}`;
+
+      const stats = document.createElement('p');
+      stats.className = 'text-xs text-slate-400 mt-1 truncate';
+      stats.textContent = `Views: ${data.views} • Released: ${timeAgo(data.publishedAt)}`;
+
+      meta.appendChild(titleEl);
+      meta.appendChild(sub);
+      meta.appendChild(stats);
+
+      card.appendChild(media);
+      card.appendChild(meta);
+
+      media.addEventListener('click', () => replaceWithIframe(media, videoId));
+
+      return card;
+    }
+
+    function replaceWithIframe(container, videoId){
+      if(container.dataset.loaded === '1') return;
+      container.dataset.loaded = '1';
+      container.innerHTML = '';
+      const iframeWrap = document.createElement('div');
+      iframeWrap.className = 'aspect-16-9';
+      const iframe = document.createElement('iframe');
+      iframe.width = '560';
+      iframe.height = '315';
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.loading = 'lazy';
+      iframeWrap.appendChild(iframe);
+      container.appendChild(iframeWrap);
+    }
+
+    async function renderList(list){
+      gallery.innerHTML = '';
+      for(const id of list){
+        const card = await makeCard(id);
+        gallery.appendChild(card);
+      }
+    }
+
+    function parseYouTubeId(input){
+      if(!input) return null;
+      input = input.trim();
+      try{
+        if(/[a-zA-Z0-9_-]{10,}/.test(input) && !input.includes('http')){
+          return input.split(/[^a-zA-Z0-9_-]/)[0];
+        }
+        const url = new URL(input);
+        if(url.hostname.includes('youtube') || url.hostname.includes('youtu.be')){
+          if(url.searchParams.get('v')) return url.searchParams.get('v');
+          const p = url.pathname.split('/').filter(Boolean);
+          return p.pop();
+        }
+      }catch(e){
+        const match = input.match(/[a-zA-Z0-9_-]{11}/);
+        return match ? match[0] : null;
+      }
+      return null;
+    }
+
+    renderList(initialVideos);
+
+    addBtn.addEventListener('click', async () => {
+      const val = videoUrlInput.value;
+      const id = parseYouTubeId(val);
+      if(!id){ alert('Could not parse a YouTube ID from that input.'); return; }
+      const card = await makeCard(id);
+      gallery.prepend(card);
+      videoUrlInput.value = '';
+    });
+
+    loadAllBtn.addEventListener('click', () => {
+      document.querySelectorAll('[data-video-id]').forEach(el => replaceWithIframe(el, el.dataset.videoId));
+    });
+
+    clearAllBtn.addEventListener('click', () => { gallery.innerHTML = ''; });
+
+    videoUrlInput.addEventListener('keydown', (e) => { if(e.key==='Enter') addBtn.click(); });
+  </script>
+    <script>
+        const POLL_INTERVAL = 1000; 
+        const RESOURCE_URL = window.location.href; 
+
+        async function checkServer() {
+        try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 1500);
+
+            const response = await fetch(RESOURCE_URL, { cache: 'no-store', signal: controller.signal });
+            clearTimeout(timeout);
+
+            if (!response.ok) throw new Error('Non-OK response'); 
+        } catch (err) {
+            console.warn('Server unreachable, refreshing page...');
+            location.reload(); 
+        }
+        }
+
+        setInterval(checkServer, POLL_INTERVAL);
+    </script>
+</body>
+
+</html>
+
+

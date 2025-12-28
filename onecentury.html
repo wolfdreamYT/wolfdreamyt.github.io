@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneCentury</title>
+    <link rel="stylesheet" href="/onecentury/oc-styles.css">
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <div id="loading-screen">
+        <div id="loading-text">Loading...</div>
+        <div id="loading-feature"></div>
+        <div id="carousel"></div>
+        <audio id="bg-music" loop>
+            <source src="do-not-use-me.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+  <audio id="myAudio" loop>
+    <source src="startup-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const audio = document.getElementById("myAudio");
+
+    function startAudio() {
+      audio.play().catch(e => console.log("Play failed:", e));
+      document.body.removeEventListener("click", startAudio);
+    }
+
+    document.body.addEventListener("click", startAudio);
+  </script>
+<button class="skip-button" onclick="window.location.href='changelog.html'">⚙️</button>
+    <div id="container">
+    <div id="sidebar">
+        <h2>Documents</h2>
+        <button onclick="showPage('doc1')">Intro</button>
+        <button onclick="showPage('doc2')">Franz Ferdinand</button>
+        <button onclick="showPage('doc3')">Austria-Hungary Demands</button>
+        <button onclick="showPage('doc4')">WW1 Starts</button>
+        <button onclick="showPage('doc5')">Trench Warefare</button>
+        <button onclick="showPage('doc6')">Christmas Truce</button>
+        <button onclick="showPage('doc7')">Shell Shock</button>
+        <button onclick="showPage('doc8')">Why was it so bad?</button>
+        <button onclick="showPage('doc9')">Poison Gas</button>
+        <button onclick="showPage('doc10')">Women in Factories</button>
+        <button onclick="showPage('doc11')">Battle of Somme</button>
+        <button onclick="showPage('doc12')">United States declares war</button>
+        <button onclick="showPage('doc13')">Vimy Ridge</button>
+        <button onclick="showPage('doc14')">Russian Revolution</button>
+        <button onclick="showPage('doc15')">Germany's last hope</button>
+        <button onclick="showPage('doc16')">Kaiser Flees to netherlands</button>
+        <button onclick="showPage('doc17')">Cease Fire</button>
+        <button onclick="showPage('doc18')">Global Impact</button>
+        <button onclick="showPage('doc19')">Treaty of Versailles</button>
+        <button onclick="showPage('doc20')">League of Nations</button>
+        <button onclick="showPage('doc21')">Germany Suffers</button>
+        <button onclick="showPage('doc22')">The roaring 20s!</button>
+        <button onclick="showPage('doc23')">Prohibition of alcohol</button>
+        <button onclick="showPage('doc24')">The great depression</button>
+        <button onclick="showPage('doc25')">FDR (Franklen D. Roosevelt) gets elected</button>
+        <button onclick="showPage('doc26')">Adolf Hitler Rise</button>
+        <button onclick="showPage('doc27')">WW2 Starts</button>
+        <button onclick="showPage('doc28')">Troops uncover the holocaust</button>
+        <button onclick="showPage('doc29')">Nazi germany loses</button>
+        <button onclick="showPage('doc30')">Victory in europe & japan falls</button>
+        <button onclick="showPage('doc31')">The Aftermath</button>
+        <button onclick="showPage('doc32')">United Nations</button>
+        <button onclick="showPage('doc33')">The Cold War</button>
+        <button onclick="showPage('doc34')">Black Lives Matter</button>
+        <button onclick="showPage('doc35')">The rise of music</button>
+        <button onclick="showPage('doc36')">The rise of technology</button>
+        <button onclick="showPage('doc37')">The September 11th attacks</button>
+    </div>
+
+
+    <div id="main">
+        <div id="timeline-wrapper">
+        <div id="timeline">
+            <div class="time-step" id="time-doc1" onclick="showPage('doc1')">Intro</div>
+            <div class="time-step" id="time-doc2" onclick="showPage('doc2')">June 1914</div>
+            <div class="time-step" id="time-doc3" onclick="showPage('doc3')">July 1914</div>
+            <div class="time-step" id="time-doc4" onclick="showPage('doc4')">August 1914</div>
+            <div class="time-step" id="time-doc5" onclick="showPage('doc5')">September 1914</div>
+            <div class="time-step" id="time-doc6" onclick="showPage('doc6')">December 1914</div>
+            <div class="time-step" id="time-doc7" onclick="showPage('doc7')">1914 Above</div>
+            <div class="time-step" id="time-doc8" onclick="showPage('doc8')">1914 Above</div>
+            <div class="time-step" id="time-doc9" onclick="showPage('doc9')">April 1915</div>
+            <div class="time-step" id="time-doc10" onclick="showPage('doc10')">1915-1918</div>
+            <div class="time-step" id="time-doc11" onclick="showPage('doc11')">July 1916</div>
+            <div class="time-step" id="time-doc12" onclick="showPage('doc12')">April 1917</div>
+            <div class="time-step" id="time-doc13" onclick="showPage('doc13')">April 9 1917</div>
+            <div class="time-step" id="time-doc14" onclick="showPage('doc14')">March 1917</div>
+            <div class="time-step" id="time-doc15" onclick="showPage('doc15')">march 1918</div>
+            <div class="time-step" id="time-doc16" onclick="showPage('doc16')">November 9th, 1918</div>
+            <div class="time-step" id="time-doc17" onclick="showPage('doc17')">November 11th, 1918</div>
+            <div class="time-step" id="time-doc18" onclick="showPage('doc18')">1918 Above</div>
+            <div class="time-step" id="time-doc19" onclick="showPage('doc19')">June 28th, 1919</div>
+            <div class="time-step" id="time-doc20" onclick="showPage('doc20')">January 1920</div>
+            <div class="time-step" id="time-doc21" onclick="showPage('doc21')">1921-1923</div>
+            <div class="time-step" id="time-doc22" onclick="showPage('doc22')">1920-1929</div>
+            <div class="time-step" id="time-doc23" onclick="showPage('doc23')">1920s-1933</div>
+            <div class="time-step" id="time-doc24" onclick="showPage('doc24')">October 1929</div>
+            <div class="time-step" id="time-doc25" onclick="showPage('doc25')">March 1932</div>
+            <div class="time-step" id="time-doc26" onclick="showPage('doc26')">1919-1933</div>
+            <div class="time-step" id="time-doc27" onclick="showPage('doc27')">1939</div>
+            <div class="time-step" id="time-doc28" onclick="showPage('doc28')">1940-1945</div>
+            <div class="time-step" id="time-doc29" onclick="showPage('doc29')">1945</div>
+            <div class="time-step" id="time-doc30" onclick="showPage('doc30')">1945</div>
+            <div class="time-step" id="time-doc31" onclick="showPage('doc31')">1945 Above</div>
+            <div class="time-step" id="time-doc32" onclick="showPage('doc32')">October 1945</div>
+            <div class="time-step" id="time-doc33" onclick="showPage('doc33')">1947 - 1991</div>
+            <div class="time-step" id="time-doc34" onclick="showPage('doc34')">1954 Above</div>
+            <div class="time-step" id="time-doc35" onclick="showPage('doc34')">1950 - 2000s</div>
+            <div class="time-step" id="time-doc36" onclick="showPage('doc35')">1985-2000s</div>
+            <div class="time-step" id="time-doc37" onclick="showPage('doc36')">September 2001</div>
+        </div>
+        </div>
+
+        <div id="doc1" class="doc-page active">
+            <h1>Hello There, Mr. O'Donohue</h1>
+            <p>In this website, contains almost every major event that took place in the 20th century. This website will include vimy ridge, world war 1 and 2, parts of modern era, and more!</p>
+            <br>
+            <br>
+            <p>Please do keep in mind that each topic is in its own document, for easy access. This is both for you, and me (since it takes me forever scrolling through the script i made on google docs), so some of the events may not be in chronological order.</p>
+            <br>
+            <br>
+            <p>However, you can see what timeline the current event your reading is just by looking sat the top, right above the document, you can see a bar with a highlited year/time. This will help you understand when it happened if not said in the article itself.</p>
+            <br>
+            <br>
+            <p>This website contains over 30 topics and events/documents, making sure it holds all information you may need to grade me. Enjoy reading!</p>
+            <p>Some of these documents may look different due to formatting with Windows XP. I did write some of this in windowsXP, as they have better wifi than my computor itself.</p>
+        </div>
+
+        <div id="doc2" class="doc-page">
+        <h1>Franz Ferdinand</h1>
+        <p>Now, let's start off with the assassination of Franz Ferdinand! In the 1910s, when Austria-Hungary was an empire, Franz Ferdinand was the heir to the throne of Austria-Hungary, which meant he was the successor of Franz Joseph I. Franz Ferdinand had a wife and three kids, making him both a dad and a prince.
+        <br>
+        <br>
+        However, many people outside his family disliked him, due to how he talked about when he claimed the throne, he would make changes, and a lot of people didn't agree with that. Franz Ferdinand one day decided to travel and visit Sarajevo, the capital of Bosnia and Herzegovina. He wanted to make an inspection of the Hungarian troops that were there at the time.
+        <br>
+        <br>
+        The inspection was scheduled for 28th of June, in 1914. Though, in that city was a terrorist group called the “Black Hand”, who decided the Archduke should be assassinated, and since Franz Ferdinand was visiting on the 28th, they thought it was the best time to strike.
+        <br>
+        <br>
+        When Franz Ferdinand was in the car driving down the road, 2 members of the Black Hand tried to throw grenades, but failed. However, the third member who was there threw the grenade, but instead of hitting the Archduke's car, it hit the car behind them, which didn't hurt Franz or his wife, but injured the men behind him.
+        <br>
+        <br>
+        After Franz and his wife had lunch at the city hall, they decided to go to the hospital to check up on the injured men, as most people would. However, when they were driving, the driver had made a wrong turn, which would lead them to horror. They didn't think much at first, but little did they know a Black Hand member was there, ready. When the member saw them, he shot both Franz and his wife; who was pregnant at the time, dead.
+        <br>
+        <br>
+        Fun fact! Did you know that when Franz Ferdinand was preparing to go to the capital of Bosnia, everyone was telling him not to go? That's right, others knew the Black Hand terrorist organization was there, and wanted him not to go, as they feared he might be killed. But as all people who think they won't die, he went anyway, which led to the event I explained just before this.
+        <br>
+        <br>
+        You may think they died instantly, but Franz did not die instantly as you might expect. He had been shot in the neck, and the other bullet had hit Sophia, the wife in the stomach that killed her almost instant. Franz Ferdinand was shot in the jugular vein, which made him choke on his own blood, and he had said “it's nothing” before dying. They were both reported dead by 11:30 AM.
+        <br>
+        <br>
+        Now not all of this is sourced from the classroom assignments, I did research for more details like when he got shot in the neck, I had to research to know it was the jugular vein, him choking from his blood, his final words and the death time.
+        <br>
+        <br>
+        Now this assassination was the beginning of a horror movie, or what we call WW1. But before we jump into that, let's talk about what happened after Franz’s death.
+        </p>
+        <div class="image-section">
+            <img src="franz-ferdinand.png" alt="Franz Ferdinand" style="max-width: 100%; height: auto;">
+        </div>
+
+        <div class="image-section">
+            <img src="franz-ferdinand2.png" alt="Franz Ferdinand" style="max-width: 100%; height: auto;">
+        </div>
+        </div>
+        <div id="doc3" class="doc-page">
+        <h1>Austria-Hungary Demands</h1>
+        <p>In the aftermath of the assassination, Austria-Hungary with Germany backing, issued what is called an ultimatum, which pretty much asks for a bunch of demands, like a punishment. Serbia mostly accepted the demands, but rejected a few of them. Even though Austria-Hungary got what they mostly wanted, they declared war on Serbia on July 28, 1914.
+        </p>
+        </div>
+        <div id="doc4" class="doc-page">
+        <h1>WW1 Starts</h1>
+        <p>Russia mobilized Serbia for support while Germany declared war on Russia AND France, making them fight on 2 fronts. Germany then invaded Belgium, which led Britain to declare war on Germany. This created World War 1, which would end until 1918. We’ll talk about this more later.
+            <br>
+            <br>
+            Now, when all this was happening, Germany decided to make a plan called the Schlieffen Plan. This was a coordinated attack where they would attack France as they thought Russia would take weeks to mobilize. They did not want to fight on 2 fronts, so Alfred Von Schlieffen made the plan in order to not fight on 2 fronts.
+            <br>
+            <br>
+            The Germans would pass through Belgium as they were neutral at the time, thinking they would easily and sneakily get to France in no time.
+            <br>
+            <br>
+            However, Germany expected Belgium to let them pass through to get to France through the north side by going through Belgium in an arc shape. Though, Belgium resisted, slowing German forces from getting to France. When Germany attacked Belgium, Great Britain declared war on Germany, which added both a powerful enemy, and an unwanted enemy.
+        </p>
+        </div>
+        <div id="doc5" class="doc-page">
+        <h1>Trench Warfare</h1>
+        <p>Trenches were a big thing in those wars, as they could hide from enemy snipers and could be used as defense. Trenches were dugouts in the ground, usually a series of open tunnels. These tunnels had zigzag walls, so if enemy bombs/artillery striked, some men would survive if the right side or the left side was blown, so walls were not just for cover from bullets but also bombs. Trench foot was becoming a thing, as some men would spend days in the trenches without footwear, making their foot deformed, and sometimes dead. This got the military to push civilians to make footwear, or “socks” as some call it. They would donate socks to the army so the soldiers had footwear to protect from trench foot.
+        </p>
+        </div>
+        <div id="doc6" class="doc-page">
+        <h1>The Christmas Truce</h1>
+        <p>Now to brighten up the horror of this topic, on exactly December 24-25 in 1914 at night, soldiers started singing from both sides, and made a temporary truce. The reason was due to how all soldiers on the western front had shared humanity, meaning they were all cold, tired, sick and sad. Christmas brought special connections to families, and the soldiers never realized how horrific this battle was,and they thought it would be over by christmas, but wasn't. So on the night of the 24th of december, German forces started putting decorations such as christmas trees and candles, and started singing christmas songs like stille nacht (silent night). Since trenches were only 50-100 yards apart, and no major battles of planned offenses, British troops started singing too, starting the truce. On the morning of the 25th, both sides (German and British) casually came out of their trenches and met in no man's land, the land where most would die. They started exchanging gifts (such as cigarettes, chocolates, and other gifts) and dug graves for their lost soldiers in previous battles. In some places, they played soccer matches, and would chat with each other.
+            <br>
+            <br>
+Sadly though, the next day they went back to their trenches, and started fighting. The entire thing was confusing to alot, as some speculate how you go from exploding shells to peace, and then back the exploding shells is weird, but others say it was emotional, psychological, and human-like nature.
+        </p>
+        </div>
+        <div id="doc7" class="doc-page">
+        <h1>Shell Shock (PTSD)</h1>
+        <p>
+            Speaking of exploding shells, a new thing was developed by soldiers called “shell shock”. This was caused by PTSD from bombs exploding over your head all day long. Some men would hear constant bombing in their ears and this would cause shell shock. At first, scientists thought it was just soldiers being scaredy cats, but they later soon realized that it was indeed a true trauma and psychological damage. It was sadly never treatable/preventable at that time, since most people thought it was cowardness or lack of bravery.
+        </p>
+        </div>
+        <div id="doc8" class="doc-page">
+            <h1>Why was the war so bad?</h1>
+            <p>
+                World War 1 was also the first mechanized war, making it more scarier, tougher, and deadlier. Before all the advanced tech, people would watch fights with popcorn, or snacks like a movie, as they would be over in hours. But in World War 1, people had tanks, machine guns, artillery, and more. This made the survival rate go down.
+            </p>
+        </div>
+        <div id="doc9" class="doc-page">
+            <h1>Poison Gas</h1>
+            <p>
+                Poison gas was a big thing in that war. They used Mustard gas, chlorine gas, and even Phosgene gas. This was dangerous as you could get a gas bomb in your trench and all your men would die if they didn't have masks. Even a very infamous man was gassed, and almost died to it, can you guess? Well, if you thought of Adolf Hitler, then you're right, Adolf Hitler was gassed and is the main reason he denied use of gas in WW2, we will later discuss this.
+                <br>
+                <br>
+Around April 1915, the Germans used poison gas for the first time. They had used a gas we discussed earlier called “Chlorine gas”, and had been used in the second battle of Ypres. Poison gas would later become the most feared weapon, as it could kill your whole team instantly without protection. Soldiers started using gas masks in order to keep alive when their trenches got gassed.
+
+            </p>
+        </div>
+        <div id="doc10" class="doc-page">
+            <h1>Women In Factories</h1>
+            <p>
+                During all the fighting, all the factories needed people as there weren't enough men due to all of them drafted. This meant only women could work, so they allowed women to work at factories at the time. Women were making artillery shells, guns, bullets, you name it! Some thought it was good while some others felt it was untraditional. Eventually though, they started realizing they were not paid as much as men. This was because they didn't want the women to earn too much, and they still felt women were the caretaker of the house.
+            </p>
+        </div>
+        <div id="doc11" class="doc-page">
+            <h1>The battle of Somme</h1>
+            <p>
+                Now, one of the longest and bloodiest wars of the war, fought by Germany and France, was the battle of verdun in 1916. Another battle that took place alongside that was the battle of Somme, which was known for its massive casualties, killing over 1 million men, and it was also the first battle that Tanks were used! Thats right, tanks (those big death machines with the bomber on it). The British Mark I tanks were the tanks used in the battle of Somme, and were deployed on September 15, 1916. They were made for the tuff and odd terrain of Somme, and were armed, had armour, and were tracked.
+            </p>
+        </div>
+        <div id="doc12" class="doc-page">
+            <h1>United States Declares War!</h1>
+            <p>
+                Now, during all this the USA (United States of Amarica) were mostly neutral, but when unrestricted submarine warfare was resumed, the zimmermann telegram was exposed. The telegram was sent by German foreign Minister Arthur Zimmermann to Heinrich von Eckhardt, which was Germany sending a message to Mexico, in January 1917. The telegram was a proposal of military alliance so if the US would join the war to fight against germany, Mexico would have both financial support and military aid, pretty much asking Mexico to attack the united states. They said if they accepted then Germany would give Mexico their old land (such as texas, arizona, and new mexico) back. However, the message/telegram was intercepted by British intelligence, and was decoded, which exposed germany. The United States were furious, and on April 6, 1917, Woodrow Wilson, the president of the US at the time, declared war on germany. 
+            </p>
+        </div>
+        <div id="doc13" class="doc-page">
+            <h1>Vimy Ridge</h1>
+            <p>Then the battle of Vimy Ridge happened. This was revolutionary and what made Canada a country. Canada was given the impossible task to take the ridge of Vimy, which the British and French failed to take back. Little did they know, Canada played it smart and was successful.
+                <br>
+                <br>
+                On April 9-12 1917, Canada took on Vimy Ridge with force, but with strategy. They used what is called “vimy glide” where they would move steadily around 100 yards every 3 minutes. This was creeping the artillery barrage, and was used to catch them off-guard.
+                <br>
+                <br>
+                Surprisingly, it worked! Canada had taken vimy ridge, making them a country. Sadly, this took many lives though. Over 3600 people died in that battle, but proved that Canada did not need the British to rule them. “I saw the birth of a nation,” said many people.
+            </p>
+        </div>
+        <div id="doc14" class="doc-page">
+            <h1>Russian Revolution</h1>
+            <p>
+During 1917, the November revolution hit. Russia’s Bolsheviks seized power. They saw the war as an obstacle for their revolution, and wanted the war to end as quickly as possible. The bolsheviks tried their hardest to prioritize the war so they could end fighting with the central powers and later created a new soviet government, which focused on domestic issues (issues within their country) and possible civil wars on internal enemies.
+            </p>
+        </div>
+        <div id="doc15" class="doc-page">
+            <h1>Germany's last hope</h1>
+            <p>
+In 1918, Germany made the final, and major offense. They tried to win before American forces arrived as this was their only hope. American forces were strong, and would squish germany. However, their plan failed as the allies pushed back and is what is called “the hundred days of offense”. The German forces got exhausted, and eventually led to their collapse.
+            </p>
+        </div>
+        <div id="doc16" class="doc-page">
+            <h1>Kaiser flees germany to netherlands</h1>
+            <p>
+Right before the armistice, on november 9th, 1918, Kaiser Wilhelm II abdicated (gave up the throne) on November 9, 1918, and fled to the Netherlands. This turned Germany into a republic, called the Weimar republic. Many Germans did not think they had lost the war at the time. This created a dangerous myth that they were “stabbed in the back” by politicians, not defeated in battle. 
+            </p>
+        </div>
+        <div id="doc17" class="doc-page">
+            <h1>Cease fire</h1>
+            <p>
+At 11:00 AM on the 11th day of the 11th month in 1918, Germany agreed to an armistice (a ceasefire where soldiers would stop fighting temporarily), not a full surrender. Soldiers were still in trenches when it ended, and many were shocked at how suddenly the war was called off. The war was over, but peace was not fully resolved. 
+            </p>
+        </div>
+        <div id="doc18" class="doc-page">
+            <h1>Global Impact</h1>
+            <p>
+The global impact that the war made was catastrophic. Over 9 million soldiers died, and 7 million civilians died too. Millions were wounded too, and don't forget the economic impact. The empires of Austria-Hungary, Ottoman, Russian, and German were also dissolved, which severely impacted the rest of the world.            </p>
+        </div>
+        <div id="doc19" class="doc-page">
+            <h1>Treaty of Versailles</h1>
+            <p>
+                Finally, the treaty of Versailles was made, exactly on the 28th of june, 1919. A peace conference was held in France, leaders of the “big four” (britain, france, italy, and united states) negotiated terms. However, germany was not invited to the table, and was forced to accept the terms that:
+                <br>
+                <br>
+- They held Full blame for starting the war 
+<br>
+- Pay huge reparations (~132 billion gold marks)
+<br>
+- Lose territory (Alsace-Lorraine to France, and land to Poland)
+<br>
+- Shrink its army to 100,000 men
+<br>
+- Lose its navy, air force, and all tanks
+<br>
+- Demilitarize the Rhineland (no German troops there)
+<br>
+<br>
+Germany signed it under protest on June 28, 1919, exactly 5 years after Franz Ferdinand’s assassination. This was the end of World War 1, which was significant.
+<br>
+<br>
+The treaty and post-war treaties also redrew europe maps, making austria-hungary split up into 2 different countries, the ottoman empire was dismantled losing territory to france and britain in the middle east, poland was recreated after a century of being wiped off the map, and finland, latvia, lithuania, and estonia had gained independence from the old russian empire.
+
+            </p>
+        </div>
+        <div id="doc20" class="doc-page">
+            <h1>League of Nations</h1>
+            <p>
+                On January 10th, 1920, the League Of Nations was formed, and was established by Woodrow Wilson to prevent future wars and complications from happening. Ironically, the United States never joined the U.S. The Senate refused to ratify (give consent) the treaty. 
+            </p>
+        </div>
+        <div id="doc21" class="doc-page">
+            <h1>Germany Suffers</h1>
+            <p>
+After World War 1, Germany became poor and its economic empire collapsed. In 1921-1923 the treaty of Versailles was forced to make Germany pay over 100 Billion gold marks to the allies. When Germany fell behind on payments, France and Belgium invaded Ruhr, an industrial part of germany. Workers started going on strike as they did not approve of the Ruhr invasion. The government kept printing more and more money to pay, and this led to hyperinflation, making prices skyrocket so bad that a single loaf of bread cost millions of gold marks to buy.
+<br>
+<br>
+People would burn money in fireplaces due to money being cheaper and firewood, and money become toys; like literally there are images of kids making hats, boats, anything that can be made of paper was made of money. Due to all this chaos, people started blaming the government for the poor decisions that the government had made. 
+            </p>
+        </div>
+        <div id="doc22" class="doc-page">
+            <h1>The Roaring 20s Begin!</h1>
+            <p>
+                While all this was going on in Germany, the US was Roaring! The 1920s was known as the “Roaring 1920s”, with a new style called “flappers”. Women started dressing differently, as they wanted to rebel against the style of women in those days. it was mostly a subculture, and women would dress in a more modern style, with short skirts, bobbed hair and jazz music! Flappers also engaged in drinking, smoking and socializing without chaperones, which some saw as “unlady-like”.
+<br>
+<br>
+Factories produced many goods during the 1920s, as mass production techniques expanded across industries. The invention of products like automobiles, radios, and refrigerators transformed everyday life. Henry Ford's introduction of the assembly line in 1913 made car production much faster and more affordable, enabling the mass production of the Model T. From 1914 to 1925, the Model T famously came only in black to simplify production. However, in 1926–1927, Ford reintroduced multiple color options such as green, maroon, gunmetal blue, fawn gray, and black, with availability varying by model and year. 
+<br>
+<br>
+The roaring 20s was also known for its mass movie production! Famous movies like Nosferatu: a symphony of horror, and the first talking film “The jazz singer” was shown in movie theatres for the first time! Many at the time called talking films “talky films” and were mostly “weird”, but now we use talking in movies all the time!
+<br>
+<br>
+The radio brought music, sports, and even live messages! Imagine having a portable radio that you can listen to music with, jam up your frat party, and listen to sports games, wasn't it a dream? You could listen to broadcasts from wars overseas to have live info of what is going down!
+<br>
+<br>
+Another product that was invented was the Fridge (or as professionals call it “refrigerator”). This was groundbreaking technology! Imagine being able to keep meat from expiring after 2 days, you could freeze ice packs, or even make popsicles, and you could store so many items in there! This made the entire economy go wild as scientists could now research better, as you could keep the micro-organisms and vaccines safe from spoiling!
+<br>
+<br>
+Another amazing feature of the Roaring 20s was Buildings. New types of  buildings started developing, which were skyscrapers! Imagine being able to store and house thousands of people in one single building, and making so much money from so many people! This was the start of cities, like Toronto, New York, and more, with all now being large and holding over 10 million people! Imagine back then you could only hold a couple thousand people, but now you can hold millions of people!
+
+            </p>
+        </div>
+        <div id="doc23" class="doc-page">
+            <h1>Prohibition of Alcohol (18th amendment)</h1>
+            <p>
+Then came prohibition. In the 1920s to 1933, the 18th amendment was introduced, banning the use, sale, and production of alcohol. They intended to lower drunk people, to keep streets safer, but it backfired in the worst possible way. Illegal bars started showing up, usually behind places hidden from the public, where you could drink alcohol and not go to jail. These were called “speakeasies”, and became very popular in those times. Huge gangsters such as Al Capone started rising, making 100s of millions of dollars because he would produce and others would buy. This was called “bootlegging”, an act where you conceal alcohol to sell or drink it.
+<br>
+<br>
+In 1933, december 5th, the government saw that they had failed at banning alcohol, increased gang and criminal activity, so they decided to change the 18th amendment to the 21st amendment, which repealed (revoked) the 18th amendment (which was banning of alcohol). 
+
+            </p>
+        </div>
+        <div id="doc24" class="doc-page">
+            <h1>The great depression starts</h1>
+            <p>
+                However, farmers did not get included in the roaring 20s. Most farmers were in debt, and people started borrowing money from the bank. Some borrowed too much money, and bought stocks on credit. The economy was built as a house of cards, which didn't help much. This would later come to be known as the great depression.
+<br>
+<br>
+On October 29th, 1929, also known as Black Tuesday, the stock markets crashed. Too many people bought stocks on margin (they borrowed from the banks to get stocks), and when the stock markets began to fall, everyone panicked, selling all their stocks. Imagine tens of millions of people selling stocks, and each person lowers the stock price. So many people sold their stocks that the stock market crashed, making billions of dollars vanish overnight. Banks literally collapsed, and investors failed big time.
+<br>
+<br>
+Then, if things couldn't get worse, people went to banks and withdrew all their money in their accounts, which obviously did not help at all. Factories produced so many goods and products that they didn't sell enough, and they laid off many employees as they had way too much supply for so little demand. The US then put tariffs on imported products hoping to revive their businesses, but if you know anything about tariffs, it's a bad idea—grunt Trump and China. 1 in 4 workers were unemployed, making it even worse. In simple terms, overnight the entire economy got destroyed to its core, and the government made it worse with tariffs.
+<br>
+<br>
+Many people became homeless, many were starving, and people were lining up at soup kitchens. Families would live in makeshift shelters called "Hoovervilles" as many blamed President Hoover for the Great Depression.
+<br>
+<br>
+Dust Bowls became a widespread problem, as farmland was turned into dust due to the weather conditions, killing all crops and making big dust storms called "Dust Bowls." This made many farmers travel to the west, often to California as they migrated due to all the storms.
+<br>
+<br>
+The president at the time, Herbert Hoover, thought that the economy would fix itself, but this turned out to be not true as many started dying and the conditions were too bad. He built some things such as the Hoover Dam, but did not help the poor very much.
+
+            </p>
+        </div>
+        <div id="doc25" class="doc-page">
+            <h1>Franklin D. Roosevelt (FDR) Gets elected</h1>
+            <p>
+                In 1932, Franklin D. Roosevelt was elected president (The FDR) and promised that he would remove the gold standard, as that was the major issue preventing the government from printing money to help the economy.
+                <br>
+                <br>
+                FDR started to change the US. He removed the gold standard and started relief camps. These were to help people gain money gradually, but the conditions were not so good. He told people that he would make more jobs, which made infrastructure (including roads, buildings, dams, everything). As more jobs were available, the economy started getting back up on its feet. The Social Security Act (1935) was put in place to give money to the elderly and unemployed.
+
+            </p>
+        </div>
+        <div id="doc26" class="doc-page">
+            <h1>Adolf Hitler's Rise</h1>
+            <p>
+                Now, while the US started getting back up, Germany was in chaos and serious trouble. In 1923, long before the Depression, a man named Adolf Hitler tried to overthrow the government of Munich but failed. He was arrested and sentenced to 5 years of jail time, and while he was there, he wrote an infamous book called "Mein Kampf" or "My Struggles."
+                <br>
+                <br>
+When Hitler was released, the Nazi Party fell, as people saw them as extreme and untrustworthy. So Hitler decided instead of being a fighter, he would rise with fame by election. He joined elections, promising everything the Germans wanted that was taken.
+<br>
+<br>
+When the Great Depression hit in 1929, everyone in Germany lost their jobs and were starving. As we spoke of earlier, money could not buy you firewood. Hitler's Nazi Party promised new jobs and making Germany great again, which exploded. In 1930, the Nazi Party was the second largest party, and in 1932 the Nazi Party was the biggest party. On January 20th, 1933, Hitler became Chancellor of Germany. Many elites thought they could control him, but they couldn't.
+<br>
+<br>
+Later on, the Reichstag (parliament) caught fire, and Hitler blamed the communists for it. He convinced the president to sign the Reichstag Fire Decree, removing civil liberties (being free in society) and arresting political enemies.
+<br>
+<br>
+In March 1933, Hitler passed the Enabling Act, which gave him dictator powers. All other parties were banned, the press was censored, and opponents were jailed or executed. In 1934, President Hindenburg died. Hitler declared himself Führer (leader), combining Chancellor and President.
+<br>
+<br>
+Hitler started controlling Germany after becoming leader. He controlled the news and sent propaganda. He increased the military, even though it was banned in the Treaty of Versailles. Germany blamed the Jewish community for the problems, which was an easy target for them.
+
+            </p>
+        </div>
+        <div id="doc27" class="doc-page">
+            <h1>WW2 Starts</h1>
+            <p>
+                On September 1st, 1939, Hitler invaded Poland. Britain and France declared war on Germany on September 3rd, 1939. Hitler's army quickly took much of Europe (France, Netherlands, Belgium) and killed over millions. On September 17th, 1939, the Soviet Union invaded eastern Poland, part of the secret Molotov-Ribbentrop Pact. Then, on November 30th, 1939, the Soviet Union attacked Finland, which started the Winter War.
+<br>
+<br>
+                In the early 1940s, Germany continued to expand and invaded the Soviet Union in 1941, starting a massive and brutal front. Japan, Germany’s ally, attacked Pearl Harbor on December 7th, 1941, bringing the United States into the war.
+<br>
+<br>
+                The attack on pearl harbor was an unexpected attack from japan which caused many lives and destroyed many military ships. The US president Franklin D. Roosevelt declared war on Germany, and this would make Germany fall drastically. 
+
+            </p>
+        </div>
+        <div id="doc28" class="doc-page">
+            <h1>Troops uncover the holocaust</h1>
+            <p>
+As Allied troops moved deeper into Nazi territory in 1944 and 1945, they began discovering the horrifying truth of the Holocaust. The holocaust was a series of camps built to kill and commit genocide to jewish people. The Nazis had built a system of concentration camps and death camps to commit genocide of Jews, as well as other groups like Romani people, disabled individuals, political prisoners, and more. 
+<br>
+<br>
+The Nazis would often go into hospitals, killing everyone there, and leaving. This was horrific as you would be totally fine, just getting a small infection of the ear, and then shot by nazis. The Nazis believed that people who were ill or sick should die as they are “infecting life”.
+<br>
+<br>
+One of the most infamous camps was Auschwitz, located in Poland. Over 1 million people, mostly Jews, were murdered there using gas chambers, forced labor, starvation, and horrific medical experiments. Another camp, Plaszow, was a forced labor camp also in Poland, and became known for extreme cruelty under SS commandant Amon Göth, famously portrayed in Schindler’s List.
+<br>
+<br>
+When camps were built at first, Nazis would have to shoot them directly. But the impact of psychological pain from nazi officers needed to be assessed. It was hard to kill a 3 year old in the head with a gun, even for some of the worst, so the Nazis had a meeting and came up with the idea of gas chambers. This would lead to mass genocide, killing millions of jews.
+<br>
+<br>
+By the end of the Holocaust, over 6 million Jews were killed, two-thirds of Europe’s Jewish population. The Holocaust is remembered as one of the darkest and most horrific events in human history. We learn about it not to praise the evil, but to know why we never should do anything like this again, as this was terror for people.
+
+            </p>
+        </div>
+        <div id="doc29" class="doc-page">
+            <h1>Nazi Germany falls</h1>
+            <p>
+                As Allied forces closed in on Germany, Hitler and his wife went to his bunker and committed suicide. His wife had taken a poison pill while Hitler took a Walther PPK pistol and shot himself in the head. The 7.65mm bullet was used for a Walther PPK pistol.
+<br>
+<br>
+                After Hitler’s death on April 30, 1945, Germany quickly started to crumble. Just a week later, on May 7, 1945, Germany officially surrendered unconditionally to the Allied forces. This is known as V-E Day (Victory in Europe Day), which was celebrated on May 8, 1945. World War II was over in Europe, but not in the Pacific.
+
+            </p>
+        </div>
+        <div id="doc30" class="doc-page">
+            <h1>Victory in Europe & Japan falls</h1>
+            <p>
+                While Europe was celebrating the end of the war, the United States was still fighting Japan. Japan refused to surrender, even after intense firebombing of cities like Tokyo, which killed over 100,000 civilians in one night. So, the US made a decision that would change the world forever.
+<br>
+<br>
+On August 6, 1945, the US dropped the first atomic bomb on Hiroshima, Japan, killing around 140,000 people. Then, on August 9, 1945, a second atomic bomb was dropped on Nagasaki, killing about 70,000 more. Japan finally agreed to surrender.
+<br>
+<br>
+On August 15, 1945, Japan announced its surrender. This day is known as V-J Day (Victory over Japan Day). The formal signing happened on September 2, 1945, aboard the USS Missouri. World War II was officially over.
+
+            </p>
+        </div>
+        <div id="doc31" class="doc-page">
+            <h1>The Aftermath</h1>
+            <p>
+But now the world had to deal with the aftermath. Countries were destroyed, millions were dead, and refugees were everywhere. The horrors of the Holocaust were exposed, revealing that over 6 million Jews had been murdered by the Nazis.
+            </p>
+        </div>
+        <div id="doc32" class="doc-page">
+            <h1>United Nations</h1>
+            <p>
+In 1945, the United Nations was created to prevent another world war. 51 countries were to come together to try and solve global conflicts peacefully, without war. This was the better version of League of Nations, and you can find their base camp at New York, U.S.
+            </p>
+        </div>
+        <div id="doc33" class="doc-page">
+            <h1>The Cold War</h1>
+            <p>
+The U.S. and the Soviet Union (USSR) were now the two superpowers. They were allies during WWII, but after the war, they started to disagree. The US wanted democracy and capitalism, while the USSR wanted to spread communism. This led to a new kind of war: the Cold War.
+In 1947, the US introduced the Marshall Plan to help rebuild European countries and stop the spread of communism by giving them money and support.
+<br>
+<br>
+Then in 1949, Germany was split in two: West Germany (capitalist and supported by the US  and allies) and East Germany (communist and controlled by the USSR). Berlin, the capital, was also split. The Berlin Airlift happened in 1948–1949 when the USSR blocked supplies to West Berlin, so the US flew in food and fuel for almost a year.
+<br>
+<br>
+After World War II ended in 1945, the world was split into two powerful sides: the United States and the Soviet Union (USSR). These two were called “superpowers”, and they didn’t trust each other at all. The US believed in democracy and capitalism, while the USSR wanted communism to spread. This caused what we now call the Cold War—a war of threats, spying, and competition, but without the two sides directly shooting at each other.
+<br>
+<br>
+In 1947, U.S. President Harry Truman promised to help any country threatened by communism. This was called the Truman Doctrine. Around the same time, the U.S. created the Marshall Plan, giving billions of dollars to rebuild Western Europe so that they wouldn't fall to communism. The USSR saw this as the US trying to buy influence.
+<br>
+<br>
+Germany was divided into two: the West controlled by the U.S., Britain, and France, and the East controlled by the USSR. In 1948, Stalin tried to block off West Berlin (which was in East Germany) by cutting off supplies. In response, the U.S. and its allies flew in food and fuel for nearly a year. This was called the Berlin Airlift, and it showed the West wasn’t going to back down.
+<br>
+<br>
+In 1950, communist North Korea, backed by China and the USSR, invaded South Korea, supported by the U.S. and the United Nations. It was a brutal war, with millions dead. In 1953, they signed a ceasefire, and Korea remained divided at the 38th parallel, just like it is today. This war was one of the first real fights in the Cold War.
+<br>
+<br>
+The U.S. and its allies had already formed a group called NATO (North Atlantic Treaty Organization) in 1949, to protect themselves from Soviet attacks. In 1955, the USSR responded by creating the Warsaw Pact with other communist countries in Eastern Europe. The world was now divided into two armed camps.
+<br>
+<br>
+In 1957, the USSR launched Sputnik, the first satellite into space. This shocked the U.S., and started the Space Race—a battle to see who could control space first. The U.S. quickly created NASA, and started building rockets and training astronauts. This race wasn’t just about science—it was also about power and showing who was better.
+<br>
+<br>
+East Germans were escaping to West Germany for freedom and better lives. To stop this, in 1961, the Soviets built the Berlin Wall—a huge wall that divided East and West Berlin. It became a symbol of the Cold War, showing how the world was split between communism and democracy.
+<br>
+<br>
+Probably the scariest moment of the Cold War was In 1962, when the U.S. found out the USSR was putting nuclear missiles in Cuba, just 90 miles from Florida. President John F. Kennedy warned them to remove the missiles or face war (which the USSR had not much of a choice). For 13 days, the world held its breath, hoping nothing bad happened. Luckily, In the end, the Soviets removed the missiles, and the U.S. promised not to invade Cuba. Some people say this was the closest the world came to nuclear war, and others thought of it as a “lesson”.
+            </p>
+        </div>
+        <div id="doc34" class="doc-page">
+            <h1>Black Lives Matter (Civil Rights Movement)</h1>
+            <p>
+                Another new movement that started in 1954 was the Civil Rights movement. In 1954, people started to realize that the rights for black people were not fair, and black people started peacefully protesting. The separation of black and white was not okay, and people like Nelson Mandela, Martin Luther king, and malcom X, and more started fighting back, and started the civics movement.
+<br>
+<br>
+Martin Luther King made the famous quote “I have a dream” which was known all around the world. “I have a dream that one day my four little children will live in a nation where they will not be judged by the color of their skin but by the content of their character.” This got many to start acting up against systemic racism.
+<br>
+<br>
+Unfortunately, in the US racism is still a major issue. People like George Floyd and Tamir Rice had been killed by police officers, who were corrupt. The black lives matter org has been promoted and is one of the most important organizations, and it helps stop racism.
+
+            </p>
+        </div>
+        <div id="doc35" class="doc-page">
+            <h1>Rise of Rock</h1>
+            <p>
+Now let's make this article a bit brighter, shall we?! In the 1960s, and 1970s, rock became a widely known music genre, and led some of the greatest bands of all time. Famous rock bands like Queen, Bon Jovi, Whitesnake, and even some classics like Metallica, Led Zeppelin, or Aerosmith were top of the line! Whenever a new release came out, people would buy the disks, or vinyl records at the stores!
+            </p>
+        </div>
+                <div id="doc36" class="doc-page">
+            <h1>The Rise of Technology</h1>
+            <p>
+ In 1985, Microsoft released the first ever Windows version: 1.0. This version allowed users to select apps on screen, with a mouse/cursor, buttons, and more! It was groundbreaking, because most Operating systems used only text, which got boring. But with UI and Graphics, you can introduce a new generation of computers.
+<br>
+<br>
+Microsoft soon released 2.0, 3.0 and even 3.1! These were amazing as every new OS had a new UI, more better graphics, and better sound!
+<br>
+<br>
+Then, in 1995, came windows 95. This was the ground breaking technology, which introduced the official UI of windows! It was a teal background with app icons on the desktop, and a task bar on the bottom. You could look through programs, you could play games, and you could even connect external drives and communicate with them without needing to use MS-DOS!
+<br>
+<br>
+After windows 95, came windows 98, released in 1998, a better version of 95. Despite being almost exactly the same as the 95, it still had better apps, more features and better customizability. Windows 98 is probably the most iconic UI you’ll ever see.
+<br>
+<br>
+After those windows versions, microsoft created many new versions (such as the NT series, but did not get alot of fame), and probably the most notorious OS that they released after windows 98, was Windows XP.
+<br>
+<br>
+In 2001, windowsXP was released to consumers, and had the iconic startup sound, and included the most fun games of the time: pinball 3D, minesweeper, hearts, spider solitaire, and more! Windows XP came with better drives, and despite being over 20 years old, you can still connect to the internet with it, as it did not rely on dial-up. You can still log into your google account, and use google apps, as the browser most known for its user-compatibility for windowsXP: MyPal. Infact, some of this script I wrote in windowsXP, so thats why some of the format styles of the previous description are a bit weird. 
+            </p>
+        </div>
+        <div id="doc37" class="doc-page">
+        <h1>The September 11 Attacks</h1>
+        <p>Now another major event that took place in 2001 is 9/11. This event was a terrorist attack on the United States, originating from afghanistan. On the 11th day of September, at around 8:46AM, a plane was taken hostage by Al-Qaeda terrorist group, and was american airlines flight 11, and was forced to crash into the north tower of the world trade centre at 8:46AM. The terrorist group leader for that plane was Mohamed Atta. He was the hijacker pilot, who forced the plane to crash into the north tower. At first, everyone thought it was a mistake, but then flight 175 was forced to crash into the south tower at 9:03AM, which then made everyone realize it was not what they thought, it was hell, in fact, they realized it was terrorists at play.  The second plane crash was led by Marwan al-Shehhi, the other hijacker pilot. 
+<br>
+<br>
+Due to the amount of heat and burning fuel, the tower’s central core and infrastructure melted, making the towers collapse. This collapse turned all of New York into a dusty storm. The outcome of the attacks were devastating. Nearly 2,996 (almost 3,000) people died on 9/11.
+<br>
+<br>
+This sparked President Barack Obama at the time. It took Obama and his team nearly 10 years, but then on May 2nd, 2011, the navy seal team was sent to a raid to kill Osama bin laden, the leader of Al-Qaeda (the terrorist group that caused 9/11). 
+<br>
+<br>
+At 1:00 in pakistan time, osama bin laden was found in his hidden hideout spot in Abbottabad, where the navy seal team, specifically Robert O’Niell. Robert shot Osama bin Laden in the head and chest, to verify his death.
+<br>
+<br>
+To make sure no one would honor him, the military took Osama Bin Laden’s body and threw it in the ocean. 
+<br>
+<br>
+In 2006, the World Trade centre re-opened, but as a single tower. And on march 13, 2006 they had also built the 9/11 memorial, where only the sound of water you can hear. The memorial is not only built to display the attack and its devastating outcome, but to show the horror of reading all the names, thinking of all those families who either lost their mom, dad, or even both.
+<br>
+<br>
+Nothing can replace those 3000 lives, but remembering and honoring them is as much as we can do. In the US, on September 11th, there is a moment of silence, to honor and respect all those lives taken by those terrorists.
+</p>
+        </div>
+    </div>
+    </div>
+
+    <script src="onecentury/script.js"></script>
+    <script>
+        const POLL_INTERVAL = 1000; 
+        const RESOURCE_URL = window.location.href; 
+
+        async function checkServer() {
+        try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 1500);
+
+            const response = await fetch(RESOURCE_URL, { cache: 'no-store', signal: controller.signal });
+            clearTimeout(timeout);
+
+            if (!response.ok) throw new Error('Non-OK response'); 
+        } catch (err) {
+            console.warn('Server unreachable, refreshing page...');
+            location.reload(); 
+        }
+        }
+
+        setInterval(checkServer, POLL_INTERVAL);
+    </script>
+</body>
+</html>
