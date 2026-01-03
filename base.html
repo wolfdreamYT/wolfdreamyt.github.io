@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HALLMAN 1.2.0</title>
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        overflow: hidden;
+        font-family: monospace;
+    }
+    canvas {
+        display: block;
+        margin: 1px;
+        background: #0a0033;
+        image-rendering: pixelated;
+        cursor: none;
+    }
+    #sidebar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #000080; 
+        color: #00ff00; 
+        font-family: monospace;
+        font-size: 20px;
+        padding: 20px;
+        box-sizing: border-box;
+        border-left: 2px solid #00ffff; 
+    }
+</style>
+</head>
+<body>
+
+<canvas id="game" width="1328" height="750"></canvas>
+<div id="sidebar">
+    <div id="pointsDisplay">POINTS: 0</div>
+    <div id="healthDisplay">HEALTH: 100</div>
+</div>
+<audio id="shootSound" src="gunshot.mp3"></audio>
+<audio id="bonusBlockSound" src="bonus-sound.mp3"></audio>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const keys = {};
+document.addEventListener("keydown", e => keys[e.code] = true);
+document.addEventListener("keyup", e => keys[e.code] = false);
+
+const shootSound = document.getElementById("shootSound");
+
+const wallTexture = new Image();
+wallTexture.src = "brick.png"; 
+let wallPattern = null;
+
+wallTexture.onload = () => {
+    wallPattern = ctx.createPattern(wallTexture, "repeat");
+};
+
+
+// PLAYER
+const player = {
+    x: 100,
+    y: 100,
+    size: 20,
+    speed: 3,
+    dir: "up",
+    hp: 100,
+};
+
+// BULLETS
+const bullets = [];
+
+// ENEMIES
+const enemies = [];
+const enemyBullets = [];
+
+// MAP
+const map = {
+    width: 1600,
+    height: 1200
+};
+
+// WALLS
+const walls = [
+    {x: 0, y: 0, w: 1600, h: 40},
+    {x: 0, y: 1160, w: 1600, h: 40},
+    {x: 0, y: 0, w: 40, h: 1600},
+    {x: 1560, y: 0, w: 40, h: 1200},
+    {x: 200, y: 40, w: 40, h: 200},
+    {x: 200, y: 390, w: 40, h: 660},
+    {x: 400, y: 40, w: 200, h: 480},
+    {x: 600, y: 40, w: 40, h: 480},
+    {x: 400, y: 650, w: 100, h: 400},
+    {x: 600, y: 950, w: 440, h: 100},
+    {x: 500, y: 650, w: 540, h: 200},
+    {x: 800, y: 270, w: 240, h: 250},
+    {x: 800, y: 40, w: 240, h: 130},
+    {x: 1200, y: 40, w: 40, h: 400},
+    {x: 1200, y: 270, w: 250, h: 250},
+    {x: 1200, y: 650, w: 250, h: 400},
+];
+
+// BONUS BLOCKS
+const bonusBlocks = [
+    { x: 1245, y: 238, size: 30 },
+    { x: 1200, y: 1129, size: 30 },
+    { x: 400, y: 618, size: 30 }
+];
+
+
+const spawnPoint = { x: 100, y: 100 }; 
+
+let mouseX = 0;
+let mouseY = 0;
+let mouseClicked = false;
+let points = 0;
+const pointsDisplay = document.getElementById("pointsDisplay");
+const healthDisplay = document.getElementById("healthDisplay");
+
+canvas.addEventListener("mousemove", e => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+});
+
+canvas.addEventListener("mousedown", () => mouseClicked = true);
+canvas.addEventListener("mouseup", () => mouseClicked = false);
+
+// SHOOT
+function shootToward(x, y, targetX, targetY, speed, array, isPlayer = true) {
+    const dx = targetX - x;
+    const dy = targetY - y;
+    const dist = Math.hypot(dx, dy);
+    const vx = dx / dist * speed;
+    const vy = dy / dist * speed;
+
+    array.push({ x, y, vx, vy });
+
+    if (isPlayer) {
+        shootSound.currentTime = 0;
+        shootSound.play();
+    }
+}
+
+
+
+// SPAWN ENEMY
+function spawnEnemy() {
+    if (enemies.length >= 5) return;
+
+    let spawnX, spawnY;
+    let safe = false;
+
+    while (!safe) {
+        spawnX = Math.random() * (map.width - 60) + 30;
+        spawnY = Math.random() * (map.height - 60) + 30;
+
+        if (!collides(spawnX, spawnY, 20, walls)) {
+            safe = true; 
+        }
+    }
+
+    enemies.push({
+        x: spawnX,
+        y: spawnY,
+        size: 20,
+        hp: 3,
+        speed: 1.5,
+        shootCooldown: 0
+    });
+}
+
+setInterval(spawnEnemy, 3000); 
+
+// COLLISION
+function collides(x, y, size, wallsArray) {
+    return wallsArray.some(w =>
+        x < w.x + w.w &&
+        x + size > w.x &&
+        y < w.y + w.h &&
+        y + size > w.y
+    );
+}
+
+// GAME LOOP
+function update() {
+    let nx = player.x;
+    let ny = player.y;
+    if (keys["ArrowUp"] || keys["KeyW"]) { ny -= player.speed; player.dir = "up"; }
+    if (keys["ArrowDown"] || keys["KeyS"]) { ny += player.speed; player.dir = "down"; }
+    if (keys["ArrowLeft"] || keys["KeyA"]) { nx -= player.speed; player.dir = "left"; }
+    if (keys["ArrowRight"] || keys["KeyD"]) { nx += player.speed; player.dir = "right"; }
+
+    if (!collides(nx, ny, player.size, walls)) {
+        player.x = nx;
+        player.y = ny;
+    }
+
+    if (mouseClicked) {
+        const camX = Math.min(Math.max(player.x - canvas.width/2, 0), map.width - canvas.width);
+        const camY = Math.min(Math.max(player.y - canvas.height/2, 0), map.height - canvas.height);
+
+        const targetX = mouseX + camX;
+        const targetY = mouseY + camY;
+
+        shootToward(
+            player.x + player.size/2,
+            player.y + player.size/2,
+            targetX,
+            targetY,
+            7,
+            bullets,
+            true 
+        );
+
+        mouseClicked = false;
+    }
+
+    // PLAYER BULLETS
+    for (let i = bullets.length - 1; i >= 0; i--) {
+        const b = bullets[i];
+        b.x += b.vx;
+        b.y += b.vy;
+
+        if (collides(b.x, b.y, 6, walls) || b.x<0 || b.x>map.width || b.y<0 || b.y>map.height) {
+            bullets.splice(i, 1);
+            continue;
+        }
+
+        for (let j = enemies.length - 1; j >= 0; j--) {
+            const e = enemies[j];
+            if (b.x < e.x + e.size && b.x + 6 > e.x && b.y < e.y + e.size && b.y + 6 > e.y) {
+                e.hp -= 1;
+                bullets.splice(i, 1);
+                if (e.hp <= 0) {
+                    enemies.splice(j, 1);
+                    points += 5;
+                    pointsDisplay.textContent = "POINTS: " + points;
+                }
+                break; 
+            }
+        }
+
+        bonusBlocks.forEach((bb, bi) => {
+            if (b.x < bb.x + bb.size &&
+                b.x + 6 > bb.x &&
+                b.y < bb.y + bb.size &&
+                b.y + 6 > bb.y) {
+
+                bullets.splice(i, 1);
+
+                bonusBlocks.splice(bi, 1);
+
+                points += 125;
+                bonusBlockSound.play();
+                pointsDisplay.textContent = "POINTS: " + points;
+            }
+        });
+
+
+    }
+
+    // UPDATE ENEMIES
+    for (let i = enemies.length - 1; i >= 0; i--) {
+        const e = enemies[i];
+
+        // AI
+        const dx = player.x - e.x;
+        const dy = player.y - e.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist > 0) {
+            const moveX = e.speed * dx / dist;
+            const moveY = e.speed * dy / dist;
+
+            if (!collides(e.x + moveX, e.y, e.size, walls)) e.x += moveX;
+            if (!collides(e.x, e.y + moveY, e.size, walls)) e.y += moveY;
+        }
+
+        // ENEMY SHOOTING
+        e.shootCooldown--;
+        if (e.shootCooldown <= 0 && Math.random() < 0.02) {
+            shootToward(
+                e.x + e.size/2,
+                e.y + e.size/2,
+                player.x + player.size/2,
+                player.y + player.size/2,
+                5,
+                enemyBullets,
+                false 
+            );
+            e.shootCooldown = 50;
+        }
+
+        if (e.hp <= 0) enemies.splice(i, 1);
+    }
+
+    // ENEMY BULLETS
+    for (let i = enemyBullets.length - 1; i >= 0; i--) {
+        const b = enemyBullets[i];
+        b.x += b.vx;
+        b.y += b.vy;
+
+        if (collides(b.x, b.y, 6, walls) || b.x<0 || b.x>map.width || b.y<0 || b.y>map.height) {
+            enemyBullets.splice(i, 1);
+            continue;
+        }
+        if (b.x < player.x + player.size && b.x + 6 > player.x &&
+            b.y < player.y + player.size && b.y + 6 > player.y) {
+            player.hp -= 1;    
+            enemyBullets.splice(i, 1);
+
+            if (player.hp <= 0) {
+                player.x = spawnPoint.x;
+                player.y = spawnPoint.y;
+                player.hp = 100; 
+                bullets.length = 0;
+                enemyBullets.length = 0;
+            }
+
+            healthDisplay.textContent = "HEALTH: " + player.hp;
+        }
+    }
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // CAMERA
+    const camX = Math.min(Math.max(player.x - canvas.width/2, 0), map.width - canvas.width);
+    const camY = Math.min(Math.max(player.y - canvas.height/2, 0), map.height - canvas.height);
+
+    // WALLS
+    walls.forEach(w => {
+        if (!wallPattern) return; 
+        ctx.save();
+        ctx.translate(w.x - camX, w.y - camY);
+        ctx.fillStyle = wallPattern;
+        ctx.fillRect(0, 0, w.w, w.h);
+        ctx.restore();
+    });
+
+    // BONUS BLOCKS
+    ctx.fillStyle = "#ff0000"; 
+    bonusBlocks.forEach(b => {
+        ctx.fillRect(b.x - camX, b.y - camY, b.size, b.size);
+    });
+
+    // PLAYER
+    ctx.fillStyle = "#ff00ff";
+    ctx.fillRect(player.x - camX, player.y - camY, player.size, player.size);
+
+    // BULLETS
+    ctx.fillStyle = "#ffff00";
+    bullets.forEach(b => ctx.fillRect(b.x - camX, b.y - camY, 6, 6));
+
+    // ENEMIES
+    ctx.fillStyle = "#ff8800";
+    enemies.forEach(e => ctx.fillRect(e.x - camX, e.y - camY, e.size, e.size));
+
+    // ENEMY BULLETS
+    ctx.fillStyle = "#00ff00";
+    enemyBullets.forEach(b => ctx.fillRect(b.x - camX, b.y - camY, 6,6));
+
+    // CROSSHAIR
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(mouseX - 10, mouseY);
+    ctx.lineTo(mouseX + 10, mouseY);
+    ctx.moveTo(mouseX, mouseY - 10);
+    ctx.lineTo(mouseX, mouseY + 10);
+    ctx.stroke();
+
+}
+
+let canShoot = true;
+function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>
