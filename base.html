@@ -315,6 +315,7 @@ function update() {
             enemyBullets.splice(i, 1);
 
             if (player.hp <= 0) {
+                window.location.reload();
                 player.x = spawnPoint.x;
                 player.y = spawnPoint.y;
                 player.hp = 100; 
@@ -388,3 +389,4 @@ loop();
 </script>
 </body>
 </html>
+
