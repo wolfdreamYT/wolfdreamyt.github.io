@@ -19,41 +19,15 @@
     </div>
     <nav class="hidden md:flex gap-6 items-center text-slate-300">
       <a href="index.html" class="hover:text-white">Home</a>
-      <a href="genres.html" class="hover:text-white">Genres</a>
+      <a href="archon.html" class="hover:text-white">Genres</a>
     </nav>
   </header>
 
   <main class="max-w-7xl mx-auto px-6 py-12">
     <h1 class="text-4xl font-bold mb-8 text-center">Security</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
 
-      <div class="bg-slate-800/60 border border-slate-700 rounded-2xl overflow-hidden transition hover:shadow-lg">
-        <div class="p-6 cursor-pointer" onclick="toggleCardContent(this)">
-          <div class="text-2xl font-semibold">How to identify malware</div>
-          <div class="mt-2 text-slate-400">An article explains the different types of needs.</div>
-        </div>
-        <div class="card-content max-h-0 overflow-hidden transition-all duration-500 px-6 pb-6 text-slate-200">
-          <p class="mt-2">This is a test. aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-        </div>
-      </div>
-
-      <a href="https://www.bbc.com/news/technology-12345678" target="_blank" class="block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 hover:bg-slate-700 transition">
-        <div class="text-2xl font-semibold">random bbc article i found</div>
-        <div class="mt-2 text-slate-400">Learn about tech i guess.</div>
-      </a>
-
-      <div class="bg-slate-800/60 border border-slate-700 rounded-2xl overflow-hidden transition hover:shadow-lg">
-        <div class="p-6 cursor-pointer" onclick="toggleCardContent(this)">
-          <div class="text-2xl font-semibold">Another test lol</div>
-          <div class="mt-2 text-slate-400">i dont know what to put here.</div>
-        </div>
-        <div class="card-content max-h-0 overflow-hidden transition-all duration-500 px-6 pb-6 text-slate-200">
-          <p class="mt-2">i code and code and code and sleep and repeat.</p>
-        </div>
-      </div>
-
-    </div>
   </main>
 
   <script>
@@ -68,6 +42,55 @@
       }
     }
   </script>
+  <script>
+    async function loadSecurityNews() {
+      const endpoint =
+        "https://api.gdeltproject.org/api/v2/doc/doc" +
+        "?query=cybersecurity OR malware OR hacking OR data breach" +
+        "&mode=artlist" +
+        "&format=json" +
+        "&maxrecords=6";
 
+      try {
+        const res = await fetch(endpoint);
+        const data = await res.json();
+
+        const grid = document.getElementById("newsGrid");
+        grid.innerHTML = "";
+
+        if (!data.articles || data.articles.length === 0) {
+          grid.innerHTML = "<p class='text-slate-400'>No security news found. The hackers are sleeping.</p>";
+          return;
+        }
+
+        data.articles.forEach(article => {
+          const card = document.createElement("a");
+          card.href = article.url;
+          card.target = "_blank";
+          card.className =
+            "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 transition hover:bg-slate-700 hover:shadow-lg";
+
+          card.innerHTML = `
+            <div class="text-2xl font-semibold line-clamp-2">
+              ${article.title || "Untitled security chaos"}
+            </div>
+            <div class="mt-2 text-slate-400 text-sm">
+              ${article.source || "Unknown source"} — ${article.seendate?.slice(0, 10) || ""}
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById("newsGrid").innerHTML =
+          "<p class='text-red-400'>Failed to load news. Blame the internet.</p>";
+      }
+    }
+
+    // Load on page start
+    loadSecurityNews();
+  </script>
 </body>
 </html>
