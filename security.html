@@ -48,9 +48,9 @@
     async function loadSecurityNews() {
       const url = new URL("https://content.guardianapis.com/search");
       url.search = new URLSearchParams({
-        q: "security", 
+        q: '"security"',              // exact phrase
         "show-fields": "trailText",
-        "page-size": "8",
+        "page-size": "20",            // fetch more, filter harder
         "order-by": "newest",
         "api-key": GUARDIAN_API_KEY
       });
@@ -62,15 +62,22 @@
         const grid = document.getElementById("newsGrid");
         grid.innerHTML = "";
 
-        const results = data.response?.results || [];
+        let results = data.response?.results || [];
+
+        // 🔥 HARD FILTER: title or preview MUST contain "security"
+        results = results.filter(article => {
+          const title = article.webTitle?.toLowerCase() || "";
+          const preview = article.fields?.trailText?.toLowerCase() || "";
+          return title.includes("security") || preview.includes("security");
+        });
 
         if (results.length === 0) {
           grid.innerHTML =
-            "<p class='text-slate-400'>No security news found. I guess security doesnt exist lol.</p>";
+            "<p class='text-slate-400'>No true security articles found. Either the world is safe or journalism is lying.</p>";
           return;
         }
 
-        results.forEach(article => {
+        results.slice(0, 8).forEach(article => {
           const card = document.createElement("a");
           card.href = article.webUrl;
           card.target = "_blank";
@@ -92,12 +99,13 @@
       } catch (err) {
         console.error("Guardian API error:", err);
         document.getElementById("newsGrid").innerHTML =
-          "<p class='text-red-400'>Failed to load news. Blame the internet, not me!</p>";
+          "<p class='text-red-400'>Security feed failed. Someone unplugged the firewall.</p>";
       }
     }
 
     loadSecurityNews();
   </script>
+
 
 </body>
 </html>
