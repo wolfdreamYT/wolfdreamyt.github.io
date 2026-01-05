@@ -47,11 +47,29 @@
 
     async function loadSecurityNews() {
       const url = new URL("https://content.guardianapis.com/search");
+
       url.search = new URLSearchParams({
-        q: '"security"',              // exact phrase
+        section: "technology",
+
+        // 🔐 ALL THE SECURITY TAGS
+        tag: [
+          "technology/information-security",
+          "technology/cybercrime",
+          "technology/privacy",
+          "technology/surveillance",
+          "technology/data-protection",
+          "technology/hacking"
+        ].join(","),
+
+        // Extra data for previews
         "show-fields": "trailText",
-        "page-size": "20",            // fetch more, filter harder
+
+        // Grab more than we need, filter later
+        "page-size": "30",
+
+        // Fresh fear only
         "order-by": "newest",
+
         "api-key": GUARDIAN_API_KEY
       });
 
@@ -64,23 +82,32 @@
 
         let results = data.response?.results || [];
 
-        // 🔥 HARD FILTER: title or preview MUST contain "security"
+        // 🧠 FINAL ZERO-TRUST FILTER
         results = results.filter(article => {
           const title = article.webTitle?.toLowerCase() || "";
           const preview = article.fields?.trailText?.toLowerCase() || "";
-          return title.includes("security") || preview.includes("security");
+
+          return (
+            title.includes("security") ||
+            preview.includes("security") ||
+            title.includes("cyber") ||
+            preview.includes("cyber")
+          );
         });
 
         if (results.length === 0) {
           grid.innerHTML =
-            "<p class='text-slate-400'>No true security articles found. Either the world is safe or journalism is lying.</p>";
+            "<p class='text-slate-400'>No valid security articles found. Either the internet is safe or lying.</p>";
           return;
         }
 
+        // 🧱 Render cards
         results.slice(0, 8).forEach(article => {
           const card = document.createElement("a");
           card.href = article.webUrl;
           card.target = "_blank";
+          card.rel = "noopener noreferrer";
+
           card.className =
             "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 transition hover:bg-slate-700 hover:shadow-lg";
 
@@ -88,7 +115,7 @@
             <div class="text-2xl font-semibold line-clamp-2">
               ${article.webTitle}
             </div>
-            <div class="mt-2 text-slate-400 text-sm">
+            <div class="mt-2 text-slate-400 text-sm line-clamp-3">
               ${article.fields?.trailText || ""}
             </div>
           `;
@@ -97,14 +124,16 @@
         });
 
       } catch (err) {
-        console.error("Guardian API error:", err);
+        console.error("Guardian Security Feed Error:", err);
         document.getElementById("newsGrid").innerHTML =
-          "<p class='text-red-400'>Security feed failed. Someone unplugged the firewall.</p>";
+          "<p class='text-red-400'>Security feed failed. Someone tripped the IDS.</p>";
       }
     }
 
+    // 🚀 Load immediately
     loadSecurityNews();
   </script>
+
 
 
 </body>
