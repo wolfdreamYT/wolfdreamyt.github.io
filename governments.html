@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Governments — Wolf Studios</title>
+  <link rel="icon" href="icon.ico" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-900 text-slate-100 antialiased">
+
+  <header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <div class="w-10 h-10 rounded-lg"><img src="logo.png" alt="Logo"></div>
+      <div>
+        <div class="font-semibold text-lg">Wolf Studios</div>
+        <div class="text-xs text-slate-400 -mt-0.5">Inventing products like animals.</div>
+      </div>
+    </div>
+    <nav class="hidden md:flex gap-6 items-center text-slate-300">
+      <a href="index.html" class="hover:text-white">Home</a>
+      <a href="archon.html" class="hover:text-white">Genres</a>
+    </nav>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center">Governments</h1>
+    <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+  </main>
+
+  <script src="governments-fallback.js"></script>
+
+  <script>
+    const KEYS1 = {
+      NEWSDATA: "pub_dfb204a246df41acaad60b40b2e6e3dd",
+      THENEWSAPI: "Pu6qA4WinfdF9qc4QyZWCSWOxzwsNhDSKQ4CUPC2",
+      WORLDNEWS: "fa92c4471dbe4d94b9425cbc45efe10d",
+      GNEWS: "1db657f5f8855a37be41936443abe22d",
+      GUARDIAN: "122c566f-8bd3-4e24-833a-afbd960d3e7d"
+    };
+
+    async function fetchFromNewsData() {
+      try {
+        const res = await fetch(`https://newsdata.io/api/1/news?apikey=${KEYS.NEWSDATA}&q=government&language=en`);
+        const json = await res.json();
+        return (json.results || []).map(a => ({
+          title: a.title,
+          url: a.link || a.url,
+          desc: a.description || "",
+          source: a.source_id,
+          published: a.pubDate
+        }));
+      } catch { return []; }
+    }
+
+    async function fetchFromTheNewsAPI() {
+      try {
+        const res = await fetch(`https://api.thenewsapi.com/v1/news/all?api_token=${KEYS.THENEWSAPI}&search=government&language=en`);
+        const json = await res.json();
+        return (json.data || []).map(a => ({
+          title: a.title,
+          url: a.url,
+          desc: a.description,
+          source: a.source,
+          published: a.published_at
+        }));
+      } catch { return []; }
+    }
+
+    async function fetchFromWorldNews() {
+      try {
+        const res = await fetch(`https://api.worldnewsapi.com/search-news?api-key=${KEYS.WORLDNEWS}&text=government`);
+        const json = await res.json();
+        return (json.articles || []).map(a => ({
+          title: a.title,
+          url: a.url,
+          desc: a.description,
+          source: a.source || "",
+          published: a.publishedAt || a.published_at
+        }));
+      } catch { return []; }
+    }
+
+    async function fetchFromGNews() {
+      try {
+        const res = await fetch(`https://gnews.io/api/v4/search?q=government&lang=en&apikey=${KEYS.GNEWS}`);
+        const json = await res.json();
+        return (json.articles || []).map(a => ({
+          title: a.title,
+          url: a.url,
+          desc: a.description,
+          source: a.source.name,
+          published: a.publishedAt
+        }));
+      } catch { return []; }
+    }
+
+    async function fetchFromGuardian() {
+      try {
+        const url = new URL("https://content.guardianapis.com/search");
+        url.search = new URLSearchParams({
+          q: "government OR trump OR federal",
+          "show-fields": "trailText",
+          "page-size": "20",
+          "order-by": "newest",
+          "api-key": KEYS.GUARDIAN
+        });
+        const res = await fetch(url.toString());
+        const data = await res.json();
+        return (data.response?.results || []).map(a => ({
+          title: a.webTitle,
+          url: a.webUrl,
+          desc: a.fields?.trailText || "",
+          source: "Guardian",
+          published: a.webPublicationDate
+        }));
+      } catch { return []; }
+    }
+
+    async function fetchRSS(url) {
+      try {
+        const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+        const text = (await res.json()).contents;
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "application/xml");
+
+        return Array.from(doc.querySelectorAll("item")).map(item => ({
+          title: item.querySelector("title")?.textContent || "",
+          url: item.querySelector("link")?.textContent || "",
+          desc: item.querySelector("description")?.textContent || ""
+        }));
+      } catch (e) {
+        console.warn("Failed to fetch RSS feed", url, e);
+        return [];
+      }
+    }
+
+    async function fetchFallbackRSS() {
+      const results = await Promise.all(FALLBACK_RSS.map(fetchRSS));
+      return results.flat();
+    }
+
+    async function fetchAPINews() {
+      try {
+        const results = await Promise.all([
+          fetchFromNewsData(),
+          fetchFromTheNewsAPI(),
+          fetchFromWorldNews(),
+          fetchFromGNews(),
+          fetchFromGuardian()
+        ]);
+        const all = results.flat();
+        const seen = new Set();
+        return all.filter(a => {
+          if (!a.url || seen.has(a.url)) return false;
+          seen.add(a.url);
+          return (
+            a.title.toLowerCase().includes("government") ||
+            a.desc.toLowerCase().includes("government")
+          );
+        });
+      } catch {
+        return [];
+      }
+    }
+
+    async function fetchArticleData(url) {
+      try {
+        const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+        const json = await res.json();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(json.contents, "text/html");
+
+        const title = doc.querySelector("title")?.innerText
+          || doc.querySelector("h1")?.innerText
+          || url;
+
+        const metaDesc = doc.querySelector('meta[name="description"]')?.content
+          || doc.querySelector('p')?.innerText
+          || "";
+
+        return { url, title, desc: metaDesc };
+      } catch (e) {
+        console.warn("Failed to fetch fallback URL", url, e);
+        return { url, title: url, desc: "" };
+      }
+    }
+
+    function renderArticles(articles) {
+      const grid = document.getElementById("newsGrid");
+      grid.innerHTML = "";
+      articles.forEach(a => {
+        const card = document.createElement("a");
+        card.href = a.url;
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+        card.className =
+          "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 mb-4 transition hover:bg-slate-700 hover:shadow-lg";
+        card.innerHTML = `
+          <div class="text-2xl font-semibold line-clamp-2">${a.title}</div>
+          <div class="mt-2 text-slate-400 text-sm line-clamp-3">${a.desc}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+      function urlToTitle(url) {
+        try {
+          const u = new URL(url);
+          let lastPart = u.pathname.split("/").filter(Boolean).pop() || "";
+          lastPart = lastPart.replace(/\d{4}\/\d{2}/g, "");
+          lastPart = lastPart.replace(/[-_]/g, " ");
+          lastPart = lastPart.split("?")[0];
+          if (lastPart.length) lastPart = lastPart.charAt(0).toUpperCase() + lastPart.slice(1);
+          return lastPart || url;
+        } catch {
+          return url;
+        }
+      }
+
+      function renderFallbackArticles(urls) {
+        const grid = document.getElementById("newsGrid");
+        grid.innerHTML = "";
+        urls.forEach(url => {
+          const card = document.createElement("a");
+          card.href = url;
+          card.target = "_blank";
+          card.rel = "noopener noreferrer";
+          card.className =
+            "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 mb-4 transition hover:bg-slate-700 hover:shadow-lg";
+
+          const title = urlToTitle(url);
+
+          card.innerHTML = `
+            <div class="text-2xl font-semibold line-clamp-2">${title}</div>
+            <div class="mt-2 text-slate-400 text-sm line-clamp-3">${url}</div>
+          `;
+          grid.appendChild(card);
+        });
+      }
+
+  async function loadNews() {
+      let articles = await fetchAPINews();
+      if (articles.length) {
+        renderArticles(articles);
+        return;
+      }
+
+      renderFallbackArticles(FALLBACK_URLS);
+    }
+
+    loadNews();
+  </script>
+
+</body>
+</html>
