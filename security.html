@@ -47,29 +47,11 @@
 
     async function loadSecurityNews() {
       const url = new URL("https://content.guardianapis.com/search");
-
       url.search = new URLSearchParams({
-        section: "technology",
-
-        // 🔐 ALL THE SECURITY TAGS
-        tag: [
-          "technology/information-security",
-          "technology/cybercrime",
-          "technology/privacy",
-          "technology/surveillance",
-          "technology/data-protection",
-          "technology/hacking"
-        ].join(","),
-
-        // Extra data for previews
-        "show-fields": "trailText",
-
-        // Grab more than we need, filter later
-        "page-size": "30",
-
-        // Fresh fear only
+        section: "technology",      // Only technology section
+        "show-fields": "trailText", // Give us previews
+        "page-size": "30",           // Fetch more to filter
         "order-by": "newest",
-
         "api-key": GUARDIAN_API_KEY
       });
 
@@ -80,10 +62,10 @@
         const grid = document.getElementById("newsGrid");
         grid.innerHTML = "";
 
-        let results = data.response?.results || [];
+        const results = data.response?.results || [];
 
-        // 🧠 FINAL ZERO-TRUST FILTER
-        results = results.filter(article => {
+        // Client-side filter: only security/cyber/privacy/hacking articles
+        const filtered = results.filter(article => {
           const title = article.webTitle?.toLowerCase() || "";
           const preview = article.fields?.trailText?.toLowerCase() || "";
 
@@ -91,18 +73,21 @@
             title.includes("security") ||
             preview.includes("security") ||
             title.includes("cyber") ||
-            preview.includes("cyber")
+            preview.includes("cyber") ||
+            title.includes("privacy") ||
+            preview.includes("privacy") ||
+            title.includes("hacking") ||
+            preview.includes("hacking")
           );
         });
 
-        if (results.length === 0) {
+        if (filtered.length === 0) {
           grid.innerHTML =
-            "<p class='text-slate-400'>No valid security articles found. Either the internet is safe or lying.</p>";
+            "<p class='text-slate-400'>No security articles found. Hackers must be sleeping.</p>";
           return;
         }
 
-        // 🧱 Render cards
-        results.slice(0, 8).forEach(article => {
+        filtered.slice(0, 8).forEach(article => {
           const card = document.createElement("a");
           card.href = article.webUrl;
           card.target = "_blank";
@@ -124,17 +109,15 @@
         });
 
       } catch (err) {
-        console.error("Guardian Security Feed Error:", err);
+        console.error("Guardian API error:", err);
         document.getElementById("newsGrid").innerHTML =
-          "<p class='text-red-400'>Security feed failed. Someone tripped the IDS.</p>";
+          "<p class='text-red-400'>Failed to load security news. Firewall strike?</p>";
       }
     }
 
-    // 🚀 Load immediately
+    // Load immediately
     loadSecurityNews();
   </script>
-
-
 
 </body>
 </html>
