@@ -28,8 +28,7 @@
     <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
   </main>
 
-  <!-- fallback URLs -->
-  <script src="fallback.js"></script>
+  <script src="security-fallback.js"></script>
 
   <script>
     const KEYS = {
@@ -40,7 +39,6 @@
       GUARDIAN: "122c566f-8bd3-4e24-833a-afbd960d3e7d"
     };
 
-    // ---------- API fetchers ----------
     async function fetchFromNewsData() {
       try {
         const res = await fetch(`https://newsdata.io/api/1/news?apikey=${KEYS.NEWSDATA}&q=security&language=en`);
@@ -119,7 +117,6 @@
       } catch { return []; }
     }
 
-    // ---------- Aggregate API results ----------
     async function fetchAPINews() {
       try {
         const results = await Promise.all([
@@ -144,7 +141,6 @@
       }
     }
 
-    // ---------- Fallback scraper ----------
     async function fetchArticleData(url) {
       try {
         const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
@@ -167,7 +163,6 @@
       }
     }
 
-    // ---------- Render cards ----------
     function renderArticles(articles) {
       const grid = document.getElementById("newsGrid");
       grid.innerHTML = "";
@@ -186,7 +181,6 @@
       });
     }
 
-    // ---------- Main loader ----------
     async function loadNews() {
       let articles = await fetchAPINews();
       if (articles.length) {
@@ -194,7 +188,6 @@
         return;
       }
 
-      // APIs failed → use fallback URLs
       const fallbackArticles = await Promise.all(FALLBACK_URLS.map(url => fetchArticleData(url)));
       renderArticles(fallbackArticles);
     }
