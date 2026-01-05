@@ -43,39 +43,46 @@
     }
   </script>
   <script>
+    const GUARDIAN_API_KEY = "122c566f-8bd3-4e24-833a-afbd960d3e7d";
+
     async function loadSecurityNews() {
-      const endpoint =
-        "https://api.gdeltproject.org/api/v2/doc/doc" +
-        "?query=cybersecurity OR malware OR hacking OR data breach" +
-        "&mode=artlist" +
-        "&format=json" +
-        "&maxrecords=6";
+      const url = new URL("https://content.guardianapis.com/search");
+      url.search = new URLSearchParams({
+        q: "security", 
+        "show-fields": "trailText",
+        "page-size": "8",
+        "order-by": "newest",
+        "api-key": GUARDIAN_API_KEY
+      });
 
       try {
-        const res = await fetch(endpoint);
+        const res = await fetch(url.toString());
         const data = await res.json();
 
         const grid = document.getElementById("newsGrid");
         grid.innerHTML = "";
 
-        if (!data.articles || data.articles.length === 0) {
-          grid.innerHTML = "<p class='text-slate-400'>No security news found. The hackers are sleeping.</p>";
+        const results = data.response?.results || [];
+
+        if (results.length === 0) {
+          grid.innerHTML =
+            "<p class='text-slate-400'>No security news found. I guess security doesnt exist lol.</p>";
           return;
         }
 
-        data.articles.forEach(article => {
+        results.forEach(article => {
           const card = document.createElement("a");
-          card.href = article.url;
+          card.href = article.webUrl;
           card.target = "_blank";
           card.className =
             "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 transition hover:bg-slate-700 hover:shadow-lg";
 
           card.innerHTML = `
             <div class="text-2xl font-semibold line-clamp-2">
-              ${article.title || "Untitled security chaos"}
+              ${article.webTitle}
             </div>
             <div class="mt-2 text-slate-400 text-sm">
-              ${article.source || "Unknown source"} — ${article.seendate?.slice(0, 10) || ""}
+              ${article.fields?.trailText || ""}
             </div>
           `;
 
@@ -83,14 +90,14 @@
         });
 
       } catch (err) {
-        console.error(err);
+        console.error("Guardian API error:", err);
         document.getElementById("newsGrid").innerHTML =
-          "<p class='text-red-400'>Failed to load news. Blame the internet.</p>";
+          "<p class='text-red-400'>Failed to load news. Blame the internet, not me!</p>";
       }
     }
 
-    // Load on page start
     loadSecurityNews();
   </script>
+
 </body>
 </html>
