@@ -117,6 +117,30 @@
       } catch { return []; }
     }
 
+    async function fetchRSS(url) {
+      try {
+        const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+        const text = (await res.json()).contents;
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "application/xml");
+
+        return Array.from(doc.querySelectorAll("item")).map(item => ({
+          title: item.querySelector("title")?.textContent || "",
+          url: item.querySelector("link")?.textContent || "",
+          desc: item.querySelector("description")?.textContent || ""
+        }));
+      } catch (e) {
+        console.warn("Failed to fetch RSS feed", url, e);
+        return [];
+      }
+    }
+
+    async function fetchFallbackRSS() {
+      const results = await Promise.all(FALLBACK_RSS.map(fetchRSS));
+      return results.flat();
+    }
+
     async function fetchAPINews() {
       try {
         const results = await Promise.all([
@@ -181,15 +205,49 @@
       });
     }
 
-    async function loadNews() {
+      function urlToTitle(url) {
+        try {
+          const u = new URL(url);
+          let lastPart = u.pathname.split("/").filter(Boolean).pop() || "";
+          lastPart = lastPart.replace(/\d{4}\/\d{2}/g, "");
+          lastPart = lastPart.replace(/[-_]/g, " ");
+          lastPart = lastPart.split("?")[0];
+          if (lastPart.length) lastPart = lastPart.charAt(0).toUpperCase() + lastPart.slice(1);
+          return lastPart || url;
+        } catch {
+          return url;
+        }
+      }
+
+      function renderFallbackArticles(urls) {
+        const grid = document.getElementById("newsGrid");
+        grid.innerHTML = "";
+        urls.forEach(url => {
+          const card = document.createElement("a");
+          card.href = url;
+          card.target = "_blank";
+          card.rel = "noopener noreferrer";
+          card.className =
+            "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 mb-4 transition hover:bg-slate-700 hover:shadow-lg";
+
+          const title = urlToTitle(url);
+
+          card.innerHTML = `
+            <div class="text-2xl font-semibold line-clamp-2">${title}</div>
+            <div class="mt-2 text-slate-400 text-sm line-clamp-3">${url}</div>
+          `;
+          grid.appendChild(card);
+        });
+      }
+
+  async function loadNews() {
       let articles = await fetchAPINews();
       if (articles.length) {
         renderArticles(articles);
         return;
       }
 
-      const fallbackArticles = await Promise.all(FALLBACK_URLS.map(url => fetchArticleData(url)));
-      renderArticles(fallbackArticles);
+      renderFallbackArticles(FALLBACK_URLS);
     }
 
     loadNews();
