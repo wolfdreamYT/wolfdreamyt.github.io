@@ -6,6 +6,34 @@
   <title>Ukraine War — Wolf Studios</title>
   <link rel="icon" href="icon.ico" type="image/x-icon">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="toggle.css">
+  <style>
+    #newsSearch {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 2px solid #334155; 
+    background-color: #1e293b; 
+    color: #f1f5f9; 
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    #newsSearch::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+    }
+
+    #newsSearch:focus {
+    border-color: #38bdf8; 
+    box-shadow: 0 0 10px #38bdf8;
+    background-color: #1e293b;
+    color: #f1f5f9;
+    }
+  </style>
 </head>
 <body class="bg-neutral-900 text-slate-100 antialiased">
 
@@ -25,12 +53,55 @@
 
   <main class="max-w-7xl mx-auto px-6 py-12">
     <h1 class="text-4xl font-bold mb-8 text-center">Ukraine War / Special Military Operation</h1>
+    Show propaganda articles
+    <label class="switch">
+    <input type="checkbox" id="propagandaToggle">
+    <span class="slider"></span> 
+    </label>
+    <br>
+    <br>
+    <input
+    type="text"
+    id="newsSearch"
+    placeholder="Search articles..."
+    />
+    <br>
+    <br>
+
+
     <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
   </main>
 
   <script src="ukraine-fallback.js"></script>
 
   <script>
+    let currentArticles = []; 
+
+    function filterArticlesBySearch(articles, query) {
+    if (!query) return articles;
+
+    const q = query.toLowerCase();
+    return articles.filter(a => {
+        const title = (a.title || urlToTitle(a.url || a)).toLowerCase();
+        const desc = (a.desc || "").toLowerCase();
+        return title.includes(q) || desc.includes(q);
+    });
+    }
+
+    document.getElementById("newsSearch").addEventListener("input", (e) => {
+    const query = e.target.value;
+    if (currentArticles.length && currentArticles[0].url) {
+        renderArticles(filterArticlesBySearch(currentArticles, query));
+    } else {
+        renderFallbackArticles(filterArticlesBySearch(FALLBACK_URLS, query));
+    }
+    });
+
+  </script>
+  <script>
+    let fallbackArticles = FALLBACK_URLS; 
+    let apiArticles = []; 
+
     const KEYS1 = {
       NEWSDATA: "pub_dfb204a246df41acaad60b40b2e6e3dd",
       THENEWSAPI: "Pu6qA4WinfdF9qc4QyZWCSWOxzwsNhDSKQ4CUPC2",
@@ -38,6 +109,26 @@
       GNEWS: "1db657f5f8855a37be41936443abe22d",
       GUARDIAN: "122c566f-8bd3-4e24-833a-afbd960d3e7d"
     };
+
+    const PROPAGANDA_DOMAINS = [
+        "https://sputnikglobe.com",
+        "sputnikglobe.com",
+        "themoscowtimes.com"
+    ];
+
+    function isPropaganda(url) {
+    try {
+        const hostname = new URL(url).hostname.toLowerCase();
+        return PROPAGANDA_DOMAINS.some(domain => hostname.includes(domain));
+    } catch {
+        return false;
+    }
+    }
+
+    function filterArticles(articles) {
+    const showPropaganda = document.getElementById("propagandaToggle").checked;
+    return articles.filter(a => showPropaganda || !isPropaganda(a.url));
+    }
 
     async function fetchFromNewsData() {
       try {
@@ -219,38 +310,54 @@
         }
       }
 
-      function renderFallbackArticles(urls) {
+    function renderFallbackArticles(urls) {
         const grid = document.getElementById("newsGrid");
         grid.innerHTML = "";
+
+        const showPropaganda = document.getElementById("propagandaToggle").checked;
+
         urls.forEach(url => {
-          const card = document.createElement("a");
-          card.href = url;
-          card.target = "_blank";
-          card.rel = "noopener noreferrer";
-          card.className =
+            if (!showPropaganda && isPropaganda(url)) return; // skip propaganda
+
+            const card = document.createElement("a");
+            card.href = url;
+            card.target = "_blank";
+            card.rel = "noopener noreferrer";
+            card.className =
             "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 mb-4 transition hover:bg-slate-700 hover:shadow-lg";
 
-          const title = urlToTitle(url);
+            const title = urlToTitle(url);
+            const warningHTML = isPropaganda(url)
+            ? `<span class="warning-icon" title="Verified and safe, but contains misleading/censored info ❗">❗</span>`
+            : "";
 
-          card.innerHTML = `
-            <div class="text-2xl font-semibold line-clamp-2">${title}</div>
+            card.innerHTML = `
+            <div class="text-2xl font-semibold line-clamp-2">${title} ${warningHTML}</div>
             <div class="mt-2 text-slate-400 text-sm line-clamp-3">${url}</div>
-          `;
-          grid.appendChild(card);
+            `;
+            grid.appendChild(card);
         });
-      }
-
-  async function loadNews() {
-      let articles = await fetchAPINews();
-      if (articles.length) {
-        renderArticles(articles);
-        return;
-      }
-
-      renderFallbackArticles(FALLBACK_URLS);
     }
 
+
+    async function loadNews() {
+    currentArticles = await fetchAPINews();
+    if (currentArticles.length) {
+        renderArticles(currentArticles);
+        return;
+    }
+
+    currentArticles = FALLBACK_URLS; 
+    renderFallbackArticles(currentArticles);
+    }
+
+
     loadNews();
+
+    document.getElementById("propagandaToggle").addEventListener("change", () => {
+    renderFallbackArticles(FALLBACK_URLS);
+    });
+
   </script>
 
 </body>
