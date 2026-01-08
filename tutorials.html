@@ -52,8 +52,7 @@
   </header>
 
   <main class="max-w-7xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-bold mb-8 text-center">Ukraine War / Special Military Operation</h1>
-    Show propaganda articles
+    <h1 class="text-4xl font-bold mb-8 text-center">Tutorials</h1>
     <label class="switch">
     <input type="checkbox" id="propagandaToggle">
     <span class="slider"></span> 
@@ -68,12 +67,79 @@
     <br>
     <br>
 
-
     <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
   </main>
 
-  <script src="ukraine-fallback.js"></script>
+  <script src="tutorials-fallback.js"></script>
 
+  <script>
+    function normalizeText(text = "") {
+      return text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function smartMatch(query, target) {
+      const qTokens = normalizeText(query).split(" ");
+      const t = normalizeText(target);
+
+      return qTokens.every(word => t.includes(word));
+    }
+  </script>
+
+
+  <script>
+    let searchableItems = [];
+
+    function isYouTubeURL(url) {
+      try {
+        const u = new URL(url);
+        return (
+          u.hostname.includes("youtube.com") ||
+          u.hostname.includes("youtu.be")
+        );
+      } catch {
+        return false;
+      }
+    }
+
+    function getYouTubeID(url) {
+      try {
+        const u = new URL(url);
+
+        if (u.hostname.includes("youtu.be")) {
+          return u.pathname.slice(1);
+        }
+
+        if (u.hostname.includes("youtube.com")) {
+          return u.searchParams.get("v");
+        }
+
+        return null;
+      } catch {
+        return null;
+      }
+    }
+
+    async function fetchYouTubeTitle(url) {
+      try {
+        const res = await fetch(
+          `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`
+        );
+        const json = await res.json();
+        return json.title;
+      } catch {
+        return "YouTube Video";
+      }
+    }
+  </script>
+  <script>
+    function getYouTubeThumbnail(videoId) {
+      return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    }
+  </script>
   <script>
     let currentArticles = []; 
 
@@ -89,13 +155,25 @@
     }
 
     document.getElementById("newsSearch").addEventListener("input", (e) => {
-    const query = e.target.value;
-    if (currentArticles.length && currentArticles[0].url) {
-        renderArticles(filterArticlesBySearch(currentArticles, query));
-    } else {
-        renderFallbackArticles(filterArticlesBySearch(FALLBACK_URLS, query));
-    }
+      const rawQuery = e.target.value.trim();
+
+      if (!rawQuery) {
+        renderArticles(searchableItems);
+        return;
+      }
+
+      const filtered = searchableItems.filter(item => {
+        if (item.type === "youtube") {
+          return smartMatch(rawQuery, item.title);
+        }
+
+        return smartMatch(rawQuery, item.title) ||
+              smartMatch(rawQuery, item.desc || "");
+      });
+
+      renderArticles(filtered);
     });
+
 
   </script>
   <script>
@@ -132,7 +210,7 @@
 
     async function fetchFromNewsData() {
       try {
-        const res = await fetch(`https://newsdata.io/api/1/news?apikey=${KEYS.NEWSDATA}&q=ukraine&language=en`);
+        const res = await fetch(`https://newsdata.io/api/1/news?apikey=${KEYS.NEWSDATA}&q=tutorial&language=en`);
         const json = await res.json();
         return (json.results || []).map(a => ({
           title: a.title,
@@ -146,7 +224,7 @@
 
     async function fetchFromTheNewsAPI() {
       try {
-        const res = await fetch(`https://api.thenewsapi.com/v1/news/all?api_token=${KEYS.THENEWSAPI}&search=ukraine&language=en`);
+        const res = await fetch(`https://api.thenewsapi.com/v1/news/all?api_token=${KEYS.THENEWSAPI}&search=tutorials&language=en`);
         const json = await res.json();
         return (json.data || []).map(a => ({
           title: a.title,
@@ -160,7 +238,7 @@
 
     async function fetchFromWorldNews() {
       try {
-        const res = await fetch(`https://api.worldnewsapi.com/search-news?api-key=${KEYS.WORLDNEWS}&text=ukraine`);
+        const res = await fetch(`https://api.worldnewsapi.com/search-news?api-key=${KEYS.WORLDNEWS}&text=tutorials`);
         const json = await res.json();
         return (json.articles || []).map(a => ({
           title: a.title,
@@ -174,7 +252,7 @@
 
     async function fetchFromGNews() {
       try {
-        const res = await fetch(`https://gnews.io/api/v4/search?q=ukraine&lang=en&apikey=${KEYS.GNEWS}`);
+        const res = await fetch(`https://gnews.io/api/v4/search?q=tutorial&lang=en&apikey=${KEYS.GNEWS}`);
         const json = await res.json();
         return (json.articles || []).map(a => ({
           title: a.title,
@@ -190,7 +268,7 @@
       try {
         const url = new URL("https://content.guardianapis.com/search");
         url.search = new URLSearchParams({
-          q: "ukraine OR zelensky OR ukraine-war OR ukraine-russia",
+          q: "tutorials OR tutorial",
           "show-fields": "trailText",
           "page-size": "20",
           "order-by": "newest",
@@ -247,8 +325,8 @@
           if (!a.url || seen.has(a.url)) return false;
           seen.add(a.url);
           return (
-            a.title.toLowerCase().includes("ukraine") ||
-            a.desc.toLowerCase().includes("ukraine")
+            a.title.toLowerCase().includes("tutorials") ||
+            a.desc.toLowerCase().includes("tutorials")
           );
         });
       } catch {
@@ -278,22 +356,71 @@
       }
     }
 
-    function renderArticles(articles) {
+    async function renderArticles(articles) {
       const grid = document.getElementById("newsGrid");
       grid.innerHTML = "";
-      articles.forEach(a => {
+
+      for (const a of articles) {
+        if (isYouTubeURL(a.url)) {
+          const videoId = getYouTubeID(a.url);
+          if (!videoId) continue;
+
+          const title = await fetchYouTubeTitle(a.url);
+          const thumb = getYouTubeThumbnail(videoId);
+
+          const card = document.createElement("a");
+          card.href = a.url;
+          card.target = "_blank";
+          card.rel = "noopener noreferrer";
+          card.className =
+            "block bg-slate-800/60 border border-slate-700 rounded-2xl overflow-hidden mb-4 transition hover:bg-slate-700 hover:shadow-lg";
+
+          card.innerHTML = `
+            <div class="relative">
+              <img
+                src="${thumb}"
+                alt="${title}"
+                class="w-full object-cover"
+              />
+
+              <!-- play button -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="bg-black/60 rounded-full p-4">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5">
+              <div class="text-xl font-semibold line-clamp-2">
+                ${title}
+              </div>
+              <div class="mt-1 text-slate-400 text-sm">
+                YouTube
+              </div>
+            </div>
+          `;
+
+          grid.appendChild(card);
+          continue;
+        }
+
         const card = document.createElement("a");
         card.href = a.url;
         card.target = "_blank";
         card.rel = "noopener noreferrer";
         card.className =
           "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 mb-4 transition hover:bg-slate-700 hover:shadow-lg";
+
         card.innerHTML = `
           <div class="text-2xl font-semibold line-clamp-2">${a.title}</div>
           <div class="mt-2 text-slate-400 text-sm line-clamp-3">${a.desc}</div>
         `;
+
         grid.appendChild(card);
-      });
+      }
     }
 
       function urlToTitle(url) {
@@ -311,45 +438,118 @@
       }
 
     function renderFallbackArticles(urls) {
-        const grid = document.getElementById("newsGrid");
-        grid.innerHTML = "";
+      const grid = document.getElementById("newsGrid");
+      grid.innerHTML = "";
 
-        const showPropaganda = document.getElementById("propagandaToggle").checked;
+      const showPropaganda = document.getElementById("propagandaToggle").checked;
 
-        urls.forEach(url => {
-            if (!showPropaganda && isPropaganda(url)) return; 
+      urls.forEach(async (url) => {
+        if (!showPropaganda && isPropaganda(url)) return;
 
-            const card = document.createElement("a");
-            card.href = url;
-            card.target = "_blank";
-            card.rel = "noopener noreferrer";
-            card.className =
-            "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 mb-4 transition hover:bg-slate-700 hover:shadow-lg";
+        if (isYouTubeURL(url)) {
+          const videoId = getYouTubeID(url);
+          if (!videoId) return;
 
-            const title = urlToTitle(url);
-            const warningHTML = isPropaganda(url)
-            ? `<span class="warning-icon" title="Verified and safe, but contains misleading/censored info ❗">❗</span>`
-            : "";
+          const title = await fetchYouTubeTitle(url);
+          const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
-            card.innerHTML = `
-            <div class="text-2xl font-semibold line-clamp-2">${title} ${warningHTML}</div>
-            <div class="mt-2 text-slate-400 text-sm line-clamp-3">${url}</div>
-            `;
-            grid.appendChild(card);
-        });
+          const card = document.createElement("a");
+          card.href = url;
+          card.target = "_blank";
+          card.rel = "noopener noreferrer";
+          card.className =
+            "block bg-slate-800/60 border border-slate-700 rounded-2xl overflow-hidden mb-4 transition hover:bg-slate-700 hover:shadow-lg";
+
+          card.innerHTML = `
+            <div class="relative">
+              <img src="${thumb}" class="w-full object-cover" />
+
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="bg-black/60 rounded-full p-4">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5">
+              <div class="text-xl font-semibold line-clamp-2">
+                ${title}
+              </div>
+              <div class="mt-1 text-slate-400 text-sm">
+                YouTube
+              </div>
+            </div>
+          `;
+
+          grid.appendChild(card);
+          return;
+        }
+
+        const card = document.createElement("a");
+        card.href = url;
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+        card.className =
+          "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 mb-4 transition hover:bg-slate-700 hover:shadow-lg";
+
+        const title = urlToTitle(url);
+        const warningHTML = isPropaganda(url)
+          ? `<span title="Verified but misleading ❗">❗</span>`
+          : "";
+
+        card.innerHTML = `
+          <div class="text-2xl font-semibold line-clamp-2">
+            ${title} ${warningHTML}
+          </div>
+          <div class="mt-2 text-slate-400 text-sm line-clamp-3">
+            ${url}
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
     }
 
-
-    async function loadNews() {
+  async function loadNews() {
     currentArticles = await fetchAPINews();
+
     if (currentArticles.length) {
-        renderArticles(currentArticles);
-        return;
+      searchableItems = currentArticles.map(a => ({
+        ...a,
+        type: isYouTubeURL(a.url) ? "youtube" : "article"
+      }));
+      renderArticles(searchableItems);
+      return;
     }
 
+    const items = [];
+
+    for (const url of FALLBACK_URLS) {
+      if (isYouTubeURL(url)) {
+        const title = await fetchYouTubeTitle(url);
+        items.push({
+          url,
+          title,
+          desc: "YouTube video",
+          type: "youtube"
+        });
+      } else {
+        items.push({
+          url,
+          title: urlToTitle(url),
+          desc: url,
+          type: "article"
+        });
+      }
+    }
+
+    searchableItems = items;
+    renderArticles(searchableItems);
+  }
     currentArticles = FALLBACK_URLS; 
     renderFallbackArticles(currentArticles);
-    }
 
 
     loadNews();
