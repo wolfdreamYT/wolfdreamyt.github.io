@@ -41,7 +41,7 @@
 
     async function fetchFromNewsData() {
       try {
-        const res = await fetch(`https://newsdata.io/api/1/news?apikey=${KEYS.NEWSDATA}&q=security&language=en`);
+        const res = await fetch(`https://newsdata.io/api/1/news?apikey=${KEYS.NEWSDATA}&q=software&language=en`);
         const json = await res.json();
         return (json.results || []).map(a => ({
           title: a.title,
@@ -55,7 +55,7 @@
 
     async function fetchFromTheNewsAPI() {
       try {
-        const res = await fetch(`https://api.thenewsapi.com/v1/news/all?api_token=${KEYS.THENEWSAPI}&search=security&language=en`);
+        const res = await fetch(`https://api.thenewsapi.com/v1/news/all?api_token=${KEYS.THENEWSAPI}&search=software&language=en`);
         const json = await res.json();
         return (json.data || []).map(a => ({
           title: a.title,
@@ -69,7 +69,7 @@
 
     async function fetchFromWorldNews() {
       try {
-        const res = await fetch(`https://api.worldnewsapi.com/search-news?api-key=${KEYS.WORLDNEWS}&text=security`);
+        const res = await fetch(`https://api.worldnewsapi.com/search-news?api-key=${KEYS.WORLDNEWS}&text=software`);
         const json = await res.json();
         return (json.articles || []).map(a => ({
           title: a.title,
@@ -83,7 +83,7 @@
 
     async function fetchFromGNews() {
       try {
-        const res = await fetch(`https://gnews.io/api/v4/search?q=security&lang=en&apikey=${KEYS.GNEWS}`);
+        const res = await fetch(`https://gnews.io/api/v4/search?q=software&lang=en&apikey=${KEYS.GNEWS}`);
         const json = await res.json();
         return (json.articles || []).map(a => ({
           title: a.title,
@@ -99,7 +99,7 @@
       try {
         const url = new URL("https://content.guardianapis.com/search");
         url.search = new URLSearchParams({
-          q: "security OR cyber OR privacy OR hacking",
+          q: "software",
           "show-fields": "trailText",
           "page-size": "20",
           "order-by": "newest",
