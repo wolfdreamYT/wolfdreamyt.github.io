@@ -57,15 +57,15 @@
     <main class="max-w-7xl mx-auto px-6">
       <section class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center py-20">
         <div>
-          <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">ARCHON beta!</h1>
-          <p class="mt-6 text-lg text-slate-300 max-w-xl">Advanced Resources for Cyber Help & Online Navigation.</p>
+          <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">Wolf Browser</h1>
+          <p class="mt-6 text-lg text-slate-300 max-w-xl">Our custom browser built for ARCHON.</p>
 
           <div class="mt-8 flex gap-4">
-            <a href="#genres" class="inline-flex items-center gap-3 px-6 py-3 rounded-full" style="background:linear-gradient(90deg,var(--liquid-1),var(--liquid-2));color:#071022;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.6)">Explore Genres</a>
-            <a href="404.html" class="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-slate-700 text-slate-200">Learn About ARCHON</a>
+            <a href="index.html" class="inline-flex items-center gap-3 px-6 py-3 rounded-full" style="background:linear-gradient(90deg,var(--liquid-1),var(--liquid-2));color:#071022;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.6)">Home</a>
+            <a href="archon.html" class="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-slate-700 text-slate-200">Learn About ARCHON</a>
           </div>
 
-          <div class="mt-8 text-sm text-slate-500">Genres of all kind, all opinions, and all views!</div>
+          <div class="mt-8 text-sm text-slate-500">Built-in Ad-Blocker, Anonymous browsing, and more.</div>
         </div>
 
         <div class="relative">
@@ -83,32 +83,8 @@
     <h2 class="text-3xl font-bold mb-8 text-center">Explore Genres</h2>
     <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         
-        <a href="security.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Security</div>
-        </a>
-
-        <a href="governments.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Governments</div>
-        </a>
-
-        <a href="software.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Online Software</div>
-        </a>
-
-        <a href="digital.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Technology</div>
-        </a>
-
-        <a href="ukraine.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Ukraine War</div>
-        </a>
-
-        <a href="weather.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Weather</div>
-        </a>
-
-        <a href="tutorials.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Tutorials</div>
+        <a id="windowsDownload" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
+        <div class="text-xl font-semibold">Windows x64 - download</div>
         </a>
 
     </div>
@@ -131,6 +107,22 @@
     </main>
 
     <script>
+        function windowsDownload(fileId, filename = "downloaded-file") {
+            const link = document.createElement("a");
+            link.href = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        document.getElementById("windowsDownload").addEventListener("click", () => {
+            windowsDownload(
+                "1RKMy30v_b-uuZZru5w9e4JdF1KyyOlpq",
+                "wolf-browser-windows-x64.zip"
+            );
+        });
+
       document.getElementById('year').textContent = new Date().getFullYear();
       const menuBtn = document.getElementById('menuBtn');
       menuBtn && menuBtn.addEventListener('click',() => {
