@@ -1,39 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ukraine War — Wolf Studios</title>
-  <link rel="icon" href="icon.ico" type="image/x-icon">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="toggle.css">
-  <style>
-    #newsSearch {
-    width: 100%;
-    padding: 10px 16px;
-    border-radius: 12px;
-    border: 2px solid #334155; 
-    background-color: #1e293b; 
-    color: #f1f5f9; 
-    font-size: 16px;
-    font-weight: 500;
-    outline: none;
-    transition: all 0.2s ease-in-out;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-
-    #newsSearch::placeholder {
-    color: #94a3b8;
-    font-weight: 400;
-    }
-
-    #newsSearch:focus {
-    border-color: #38bdf8; 
-    box-shadow: 0 0 10px #38bdf8;
-    background-color: #1e293b;
-    color: #f1f5f9;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WolfStudios Notice</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 40px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.7);
+            text-align: justify;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #4fc3f7;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-button {
+            padding: 12px 24px;
+            font-size: 16px;
+            color: #0a0a0a;
+            background-color: #4fc3f7;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #29b6f6;
+        }
+    </style>
 </head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK5G059TRY"></script>
 <script>
@@ -43,530 +57,27 @@
 
   gtag('config', 'G-ZK5G059TRY');
 </script>
-<body class="bg-neutral-900 text-slate-100 antialiased">
-
-  <header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-    <div class="flex items-center gap-4">
-      <div class="w-10 h-10 rounded-lg"><img src="logo.png" alt="Logo"></div>
-      <div>
-        <div class="font-semibold text-lg">Wolf Studios</div>
-        <div class="text-xs text-slate-400 -mt-0.5">Inventing products like animals.</div>
-      </div>
+<body>
+    <div class="container">
+        <h1>ARCHON has been discontinued</h1>
+        <p>
+            After much effort we put into archon, we never knew how it would turn out. but because of the intent for a high school project, everything comes to an end eventually.
+        </p>
+        <p>
+            This decision has been made due to personal and legal reasons. This means Archon is no longer supported and servers have been shutdown indefinately.
+        </p>
+        <p>
+            Any users or clients in possession of Archon are advised that WolfStudios is no longer responsible for continued use, modifications, or support. Further, warranty, or support obligations are nullified effective from the date of this announcement. Users are strongly encouraged to seek alternative solutions.
+        </p>
+        <p>
+            The effective date of this announcement is 2026-3-10 at 10:00 AM (or 20:30 in military time). We will not accept EES (Extended Enterprise Support). Thankyou for understanding and apologies for the inconvenience.
+        </p>
+        <p style="text-align:center; margin-top: 30px;">
+            — WolfStudios Management Team
+        </p>
+        <div class="button-container">
+            <a href="index.html" class="back-button">Return to Homepage</a>
+        </div>
     </div>
-    <nav class="hidden md:flex gap-6 items-center text-slate-300">
-      <a href="index.html" class="hover:text-white">Home</a>
-      <a href="archon.html" class="hover:text-white">Genres</a>
-    </nav>
-  </header>
-
-  <main class="max-w-7xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-bold mb-8 text-center">Tutorials</h1>
-    <label class="switch">
-    <input type="checkbox" id="propagandaToggle">
-    <span class="slider"></span> 
-    </label>
-    <br>
-    <br>
-    <input
-    type="text"
-    id="newsSearch"
-    placeholder="Search articles..."
-    />
-    <br>
-    <br>
-
-    <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-  </main>
-
-  <script src="tutorials-fallback.js"></script>
-
-  <script>
-    function normalizeText(text = "") {
-      return text
-        .toLowerCase()
-        .replace(/[^a-z0-9\s]/g, "")
-        .replace(/\s+/g, " ")
-        .trim();
-    }
-
-    function smartMatch(query, target) {
-      const qTokens = normalizeText(query).split(" ");
-      const t = normalizeText(target);
-
-      return qTokens.every(word => t.includes(word));
-    }
-  </script>
-
-
-  <script>
-    let searchableItems = [];
-
-    function isYouTubeURL(url) {
-      try {
-        const u = new URL(url);
-        return (
-          u.hostname.includes("youtube.com") ||
-          u.hostname.includes("youtu.be")
-        );
-      } catch {
-        return false;
-      }
-    }
-
-    function getYouTubeID(url) {
-      try {
-        const u = new URL(url);
-
-        if (u.hostname.includes("youtu.be")) {
-          return u.pathname.slice(1);
-        }
-
-        if (u.hostname.includes("youtube.com")) {
-          return u.searchParams.get("v");
-        }
-
-        return null;
-      } catch {
-        return null;
-      }
-    }
-
-    async function fetchYouTubeTitle(url) {
-      try {
-        const res = await fetch(
-          `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`
-        );
-        const json = await res.json();
-        return json.title;
-      } catch {
-        return "YouTube Video";
-      }
-    }
-  </script>
-  <script>
-    function getYouTubeThumbnail(videoId) {
-      return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-    }
-  </script>
-  <script>
-    let currentArticles = []; 
-
-    function filterArticlesBySearch(articles, query) {
-    if (!query) return articles;
-
-    const q = query.toLowerCase();
-    return articles.filter(a => {
-        const title = (a.title || urlToTitle(a.url || a)).toLowerCase();
-        const desc = (a.desc || "").toLowerCase();
-        return title.includes(q) || desc.includes(q);
-    });
-    }
-
-    document.getElementById("newsSearch").addEventListener("input", (e) => {
-      const rawQuery = e.target.value.trim();
-
-      if (!rawQuery) {
-        renderArticles(searchableItems);
-        return;
-      }
-
-      const filtered = searchableItems.filter(item => {
-        if (item.type === "youtube") {
-          return smartMatch(rawQuery, item.title);
-        }
-
-        return smartMatch(rawQuery, item.title) ||
-              smartMatch(rawQuery, item.desc || "");
-      });
-
-      renderArticles(filtered);
-    });
-
-
-  </script>
-  <script>
-    let fallbackArticles = FALLBACK_URLS; 
-    let apiArticles = []; 
-
-    const KEYS1 = {
-      NEWSDATA: "pub_dfb204a246df41acaad60b40b2e6e3dd",
-      THENEWSAPI: "Pu6qA4WinfdF9qc4QyZWCSWOxzwsNhDSKQ4CUPC2",
-      WORLDNEWS: "fa92c4471dbe4d94b9425cbc45efe10d",
-      GNEWS: "1db657f5f8855a37be41936443abe22d",
-      GUARDIAN: "122c566f-8bd3-4e24-833a-afbd960d3e7d"
-    };
-
-    const PROPAGANDA_DOMAINS = [
-        "https://sputnikglobe.com",
-        "sputnikglobe.com",
-        "themoscowtimes.com"
-    ];
-
-    function isPropaganda(url) {
-    try {
-        const hostname = new URL(url).hostname.toLowerCase();
-        return PROPAGANDA_DOMAINS.some(domain => hostname.includes(domain));
-    } catch {
-        return false;
-    }
-    }
-
-    function filterArticles(articles) {
-    const showPropaganda = document.getElementById("propagandaToggle").checked;
-    return articles.filter(a => showPropaganda || !isPropaganda(a.url));
-    }
-
-    async function fetchFromNewsData() {
-      try {
-        const res = await fetch(`https://newsdata.io/api/1/news?apikey=${KEYS.NEWSDATA}&q=tutorial&language=en`);
-        const json = await res.json();
-        return (json.results || []).map(a => ({
-          title: a.title,
-          url: a.link || a.url,
-          desc: a.description || "",
-          source: a.source_id,
-          published: a.pubDate
-        }));
-      } catch { return []; }
-    }
-
-    async function fetchFromTheNewsAPI() {
-      try {
-        const res = await fetch(`https://api.thenewsapi.com/v1/news/all?api_token=${KEYS.THENEWSAPI}&search=tutorials&language=en`);
-        const json = await res.json();
-        return (json.data || []).map(a => ({
-          title: a.title,
-          url: a.url,
-          desc: a.description,
-          source: a.source,
-          published: a.published_at
-        }));
-      } catch { return []; }
-    }
-
-    async function fetchFromWorldNews() {
-      try {
-        const res = await fetch(`https://api.worldnewsapi.com/search-news?api-key=${KEYS.WORLDNEWS}&text=tutorials`);
-        const json = await res.json();
-        return (json.articles || []).map(a => ({
-          title: a.title,
-          url: a.url,
-          desc: a.description,
-          source: a.source || "",
-          published: a.publishedAt || a.published_at
-        }));
-      } catch { return []; }
-    }
-
-    async function fetchFromGNews() {
-      try {
-        const res = await fetch(`https://gnews.io/api/v4/search?q=tutorial&lang=en&apikey=${KEYS.GNEWS}`);
-        const json = await res.json();
-        return (json.articles || []).map(a => ({
-          title: a.title,
-          url: a.url,
-          desc: a.description,
-          source: a.source.name,
-          published: a.publishedAt
-        }));
-      } catch { return []; }
-    }
-
-    async function fetchFromGuardian() {
-      try {
-        const url = new URL("https://content.guardianapis.com/search");
-        url.search = new URLSearchParams({
-          q: "tutorials OR tutorial",
-          "show-fields": "trailText",
-          "page-size": "20",
-          "order-by": "newest",
-          "api-key": KEYS.GUARDIAN
-        });
-        const res = await fetch(url.toString());
-        const data = await res.json();
-        return (data.response?.results || []).map(a => ({
-          title: a.webTitle,
-          url: a.webUrl,
-          desc: a.fields?.trailText || "",
-          source: "Guardian",
-          published: a.webPublicationDate
-        }));
-      } catch { return []; }
-    }
-
-    async function fetchRSS(url) {
-      try {
-        const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-        const text = (await res.json()).contents;
-
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, "application/xml");
-
-        return Array.from(doc.querySelectorAll("item")).map(item => ({
-          title: item.querySelector("title")?.textContent || "",
-          url: item.querySelector("link")?.textContent || "",
-          desc: item.querySelector("description")?.textContent || ""
-        }));
-      } catch (e) {
-        console.warn("Failed to fetch RSS feed", url, e);
-        return [];
-      }
-    }
-
-    async function fetchFallbackRSS() {
-      const results = await Promise.all(FALLBACK_RSS.map(fetchRSS));
-      return results.flat();
-    }
-
-    async function fetchAPINews() {
-      try {
-        const results = await Promise.all([
-          fetchFromNewsData(),
-          fetchFromTheNewsAPI(),
-          fetchFromWorldNews(),
-          fetchFromGNews(),
-          fetchFromGuardian()
-        ]);
-        const all = results.flat();
-        const seen = new Set();
-        return all.filter(a => {
-          if (!a.url || seen.has(a.url)) return false;
-          seen.add(a.url);
-          return (
-            a.title.toLowerCase().includes("tutorials") ||
-            a.desc.toLowerCase().includes("tutorials")
-          );
-        });
-      } catch {
-        return [];
-      }
-    }
-
-    async function fetchArticleData(url) {
-      try {
-        const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-        const json = await res.json();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(json.contents, "text/html");
-
-        const title = doc.querySelector("title")?.innerText
-          || doc.querySelector("h1")?.innerText
-          || url;
-
-        const metaDesc = doc.querySelector('meta[name="description"]')?.content
-          || doc.querySelector('p')?.innerText
-          || "";
-
-        return { url, title, desc: metaDesc };
-      } catch (e) {
-        console.warn("Failed to fetch fallback URL", url, e);
-        return { url, title: url, desc: "" };
-      }
-    }
-
-    async function renderArticles(articles) {
-      const grid = document.getElementById("newsGrid");
-      grid.innerHTML = "";
-
-      for (const a of articles) {
-        if (isYouTubeURL(a.url)) {
-          const videoId = getYouTubeID(a.url);
-          if (!videoId) continue;
-
-          const title = await fetchYouTubeTitle(a.url);
-          const thumb = getYouTubeThumbnail(videoId);
-
-          const card = document.createElement("a");
-          card.href = a.url;
-          card.target = "_blank";
-          card.rel = "noopener noreferrer";
-          card.className =
-            "block bg-slate-800/60 border border-slate-700 rounded-2xl overflow-hidden mb-4 transition hover:bg-slate-700 hover:shadow-lg";
-
-          card.innerHTML = `
-            <div class="relative">
-              <img
-                src="${thumb}"
-                alt="${title}"
-                class="w-full object-cover"
-              />
-
-              <!-- play button -->
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="bg-black/60 rounded-full p-4">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div class="p-5">
-              <div class="text-xl font-semibold line-clamp-2">
-                ${title}
-              </div>
-              <div class="mt-1 text-slate-400 text-sm">
-                YouTube
-              </div>
-            </div>
-          `;
-
-          grid.appendChild(card);
-          continue;
-        }
-
-        const card = document.createElement("a");
-        card.href = a.url;
-        card.target = "_blank";
-        card.rel = "noopener noreferrer";
-        card.className =
-          "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 mb-4 transition hover:bg-slate-700 hover:shadow-lg";
-
-        card.innerHTML = `
-          <div class="text-2xl font-semibold line-clamp-2">${a.title}</div>
-          <div class="mt-2 text-slate-400 text-sm line-clamp-3">${a.desc}</div>
-        `;
-
-        grid.appendChild(card);
-      }
-    }
-
-      function urlToTitle(url) {
-        try {
-          const u = new URL(url);
-          let lastPart = u.pathname.split("/").filter(Boolean).pop() || "";
-          lastPart = lastPart.replace(/\d{4}\/\d{2}/g, "");
-          lastPart = lastPart.replace(/[-_]/g, " ");
-          lastPart = lastPart.split("?")[0];
-          if (lastPart.length) lastPart = lastPart.charAt(0).toUpperCase() + lastPart.slice(1);
-          return lastPart || url;
-        } catch {
-          return url;
-        }
-      }
-
-    function renderFallbackArticles(urls) {
-      const grid = document.getElementById("newsGrid");
-      grid.innerHTML = "";
-
-      const showPropaganda = document.getElementById("propagandaToggle").checked;
-
-      urls.forEach(async (url) => {
-        if (!showPropaganda && isPropaganda(url)) return;
-
-        if (isYouTubeURL(url)) {
-          const videoId = getYouTubeID(url);
-          if (!videoId) return;
-
-          const title = await fetchYouTubeTitle(url);
-          const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-
-          const card = document.createElement("a");
-          card.href = url;
-          card.target = "_blank";
-          card.rel = "noopener noreferrer";
-          card.className =
-            "block bg-slate-800/60 border border-slate-700 rounded-2xl overflow-hidden mb-4 transition hover:bg-slate-700 hover:shadow-lg";
-
-          card.innerHTML = `
-            <div class="relative">
-              <img src="${thumb}" class="w-full object-cover" />
-
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="bg-black/60 rounded-full p-4">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div class="p-5">
-              <div class="text-xl font-semibold line-clamp-2">
-                ${title}
-              </div>
-              <div class="mt-1 text-slate-400 text-sm">
-                YouTube
-              </div>
-            </div>
-          `;
-
-          grid.appendChild(card);
-          return;
-        }
-
-        const card = document.createElement("a");
-        card.href = url;
-        card.target = "_blank";
-        card.rel = "noopener noreferrer";
-        card.className =
-          "block bg-slate-800/60 border border-slate-700 rounded-2xl p-6 mb-4 transition hover:bg-slate-700 hover:shadow-lg";
-
-        const title = urlToTitle(url);
-        const warningHTML = isPropaganda(url)
-          ? `<span title="Verified but misleading ❗">❗</span>`
-          : "";
-
-        card.innerHTML = `
-          <div class="text-2xl font-semibold line-clamp-2">
-            ${title} ${warningHTML}
-          </div>
-          <div class="mt-2 text-slate-400 text-sm line-clamp-3">
-            ${url}
-          </div>
-        `;
-
-        grid.appendChild(card);
-      });
-    }
-
-  async function loadNews() {
-    currentArticles = await fetchAPINews();
-
-    if (currentArticles.length) {
-      searchableItems = currentArticles.map(a => ({
-        ...a,
-        type: isYouTubeURL(a.url) ? "youtube" : "article"
-      }));
-      renderArticles(searchableItems);
-      return;
-    }
-
-    const items = [];
-
-    for (const url of FALLBACK_URLS) {
-      if (isYouTubeURL(url)) {
-        const title = await fetchYouTubeTitle(url);
-        items.push({
-          url,
-          title,
-          desc: "YouTube video",
-          type: "youtube"
-        });
-      } else {
-        items.push({
-          url,
-          title: urlToTitle(url),
-          desc: url,
-          type: "article"
-        });
-      }
-    }
-
-    searchableItems = items;
-    renderArticles(searchableItems);
-  }
-    currentArticles = FALLBACK_URLS; 
-    renderFallbackArticles(currentArticles);
-
-
-    loadNews();
-
-    document.getElementById("propagandaToggle").addEventListener("change", () => {
-    renderFallbackArticles(FALLBACK_URLS);
-    });
-
-  </script>
-
 </body>
 </html>

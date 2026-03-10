@@ -1,165 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Wolf Studios — Home</title>
-    <meta name="description" content="Wolf Studios — Inventing like animals." />
-    <link rel="icon" href="icon.ico" type="image/x-icon">
-
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WolfStudios Notice</title>
     <style>
-      :root{
-        --liquid-1:#a9f8ff;
-        --liquid-2:#c391ff;
-        --liquid-3:#ff9ff8;
-      }
-      .glass-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px)}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 40px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.7);
+            text-align: justify;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #4fc3f7;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-button {
+            padding: 12px 24px;
+            font-size: 16px;
+            color: #0a0a0a;
+            background-color: #4fc3f7;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #29b6f6;
+        }
     </style>
-  </head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK5G059TRY"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK5G059TRY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'G-ZK5G059TRY');
-  </script>
-  <body class="min-h-screen bg-neutral-900 text-slate-100 antialiased">
-    <header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <div class="w-10 h-10 rounded-lg brand-logo"><img src="logo.png"></div>
-
-        <div>
-          <div class="font-semibold text-lg">Wolf Studios</div>
-          <div class="text-xs text-slate-400 -mt-0.5">Inventing products like animals.</div>
+  gtag('config', 'G-ZK5G059TRY');
+</script>
+<body>
+    <div class="container">
+        <h1>ARCHON has been discontinued</h1>
+        <p>
+            After much effort we put into archon, we never knew how it would turn out. but because of the intent for a high school project, everything comes to an end eventually.
+        </p>
+        <p>
+            This decision has been made due to personal and legal reasons. This means Archon is no longer supported and servers have been shutdown indefinately.
+        </p>
+        <p>
+            Any users or clients in possession of Archon are advised that WolfStudios is no longer responsible for continued use, modifications, or support. Further, warranty, or support obligations are nullified effective from the date of this announcement. Users are strongly encouraged to seek alternative solutions.
+        </p>
+        <p>
+            The effective date of this announcement is 2026-3-10 at 10:00 AM (or 20:30 in military time). We will not accept EES (Extended Enterprise Support). Thankyou for understanding and apologies for the inconvenience.
+        </p>
+        <p style="text-align:center; margin-top: 30px;">
+            — WolfStudios Management Team
+        </p>
+        <div class="button-container">
+            <a href="index.html" class="back-button">Return to Homepage</a>
         </div>
-      </div>
-
-      <nav id="main-nav" class="hidden md:flex gap-6 items-center text-slate-300">
-        <a href="#products" class="hover:text-white">Products</a>
-        <a href="/browser.html" target="_blank" class="hover:text-white">Browser</a>
-        <a href="/media" target="_blank" class="hover:text-white">Media</a>
-        <a href="#features" class="hover:text-white">Features</a>
-        <a href="#hallman" class="hover:text-white">HallMan</a>
-        <a href="archon.html" target="_blank" class="hover:text-white">Archon</a>
-        <a href="https://github.com/wolfdreamYT/wolfdreamyt.github.io/wiki/Contact" class="hover:text-white" target="_blank">Support</a>
-        <a href="https://github.com/wolfdreamYT/contribute-public" target="_blank">
-          <button class="ml-4 px-4 py-2 rounded-md bg-white text-neutral-900 font-medium">Contribute</button>
-        </a>
-      </nav>
-
-      <div class="md:hidden">
-        <button id="menuBtn" class="px-3 py-2 border rounded-md text-slate-300 border-slate-700">Menu</button>
-      </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-6">
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center py-20">
-        <div>
-          <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">ARCHON beta!</h1>
-          <p class="mt-6 text-lg text-slate-300 max-w-xl">Advanced Resources for Cyber Help & Online Navigation.</p>
-
-          <div class="mt-8 flex gap-4">
-            <a href="#genres" class="inline-flex items-center gap-3 px-6 py-3 rounded-full" style="background:linear-gradient(90deg,var(--liquid-1),var(--liquid-2));color:#071022;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.6)">Explore Genres</a>
-            <a href="404.html" class="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-slate-700 text-slate-200">Learn About ARCHON</a>
-          </div>
-
-          <div class="mt-8 text-sm text-slate-500">Genres of all kind, all opinions, and all views!</div>
-        </div>
-
-        <div class="relative">
-          <div class="w-full h-80 md:h-96 rounded-2xl overflow-hidden" style="background:linear-gradient(180deg,#111827,#0b1220);box-shadow:0 40px 80px rgba(2,6,23,0.7);display:flex;align-items:center;justify-content:center;">
-            <img src="poster1.png" alt="Preview" class="w-full h-full object-cover rounded-2xl" />
-            <div class="absolute bottom-6 left-6 bg-black/40 p-3 rounded-md text-sm text-slate-300">
-             Official Wolf Studios Banner
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-    <section id="genres" class="py-12">
-    <h2 class="text-3xl font-bold mb-8 text-center">Explore Genres</h2>
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        
-        <a href="security.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Security</div>
-        </a>
-
-        <a href="governments.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Governments</div>
-        </a>
-
-        <a href="software.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Online Software</div>
-        </a>
-
-        <a href="digital.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Technology</div>
-        </a>
-
-        <a href="ukraine.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Ukraine War</div>
-        </a>
-
-        <a href="weather.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Weather</div>
-        </a>
-
-        <a href="tutorials.html" class="block p-6 rounded-2xl bg-slate-800/60 border border-slate-700 text-center hover:bg-slate-700 transition">
-        <div class="text-xl font-semibold">Tutorials</div>
-        </a>
-
     </div>
-    </section>
-
-
-      <footer class="mt-16 py-10 border-t border-slate-800 text-slate-400">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <div class="font-semibold text-white">Wolf Studios</div>
-            <div class="text-xs">© <span id="year"></span> Wolf Studios - Created by Nicholas Machan.</div>
-          </div>
-
-          <div class="flex gap-6 text-sm">
-            <a href="#features">Privacy</a>
-            <a href="https://github.com/wolfdreamYT/wolfdreamyt.github.io/wiki/Contact" target="_blank">Contact</a>
-          </div>
-        </div>
-      </footer>
-    </main>
-
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-      const menuBtn = document.getElementById('menuBtn');
-      menuBtn && menuBtn.addEventListener('click',() => {
-        const nav = document.getElementById('main-nav');
-        if(nav.classList.contains('hidden')) nav.classList.remove('hidden'); else nav.classList.add('hidden');
-      });
-    </script>
-        <script>
-        const POLL_INTERVAL = 1000; 
-        const RESOURCE_URL = window.location.href; 
-
-        async function checkServer() {
-        try {
-            const controller = new AbortController();
-            const timeout = setTimeout(() => controller.abort(), 1500);
-
-            const response = await fetch(RESOURCE_URL, { cache: 'no-store', signal: controller.signal });
-            clearTimeout(timeout);
-
-            if (!response.ok) throw new Error('Non-OK response'); 
-        } catch (err) {
-            console.warn('Server unreachable, refreshing page...');
-            location.reload(); 
-        }
-        }
-
-        setInterval(checkServer, POLL_INTERVAL);
-    </script>
-  </body>
+</body>
 </html>
-
-
