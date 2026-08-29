@@ -1,0 +1,487 @@
+/* =========================================================
+SIDEBAR
+========================================================= */
+
+.sidebar {
+width: 260px;
+height: 100vh;
+
+
+background: #171717;
+
+display: flex;
+flex-direction: column;
+
+padding: 10px;
+
+border-right: 1px solid #242424;
+
+flex-shrink: 0;
+
+overflow: hidden;
+
+
+}
+
+/* =========================================================
+LOGO
+========================================================= */
+
+.sidebar-logo {
+height: 46px;
+
+
+display: flex;
+align-items: center;
+
+padding: 0 12px;
+
+margin-bottom: 8px;
+
+color: #ffffff;
+
+font-size: 18px;
+font-weight: 600;
+
+user-select: none;
+
+
+}
+
+.sidebar-logo span {
+color: #7c5cff;
+
+
+margin-left: 5px;
+
+
+}
+
+/* =========================================================
+NEW CHAT BUTTON
+========================================================= */
+
+.new-chat {
+width: 100%;
+height: 44px;
+
+
+display: flex;
+align-items: center;
+
+padding: 0 13px;
+
+background: transparent;
+
+border: 1px solid #3a3a3a;
+border-radius: 8px;
+
+color: #ececec;
+
+font-family: inherit;
+font-size: 14px;
+
+cursor: pointer;
+
+transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+
+
+}
+
+.new-chat:hover {
+background: #2a2a2a;
+border-color: #464646;
+}
+
+.new-chat:active {
+background: #303030;
+}
+
+.new-chat-icon {
+width: 20px;
+
+
+margin-right: 9px;
+
+color: #cfcfcf;
+
+font-size: 20px;
+line-height: 1;
+
+text-align: center;
+
+
+}
+
+/* =========================================================
+SIDEBAR SECTIONS
+========================================================= */
+
+.sidebar-section {
+margin-top: 20px;
+}
+
+.sidebar-title {
+padding: 0 10px 8px;
+
+
+color: #777;
+
+font-size: 11px;
+font-weight: 500;
+
+text-transform: uppercase;
+
+letter-spacing: 0.06em;
+
+user-select: none;
+
+
+}
+
+/* =========================================================
+NAVIGATION
+========================================================= */
+
+.navigation {
+display: flex;
+flex-direction: column;
+
+
+gap: 2px;
+
+
+}
+
+.nav-item {
+width: 100%;
+height: 38px;
+
+
+display: flex;
+align-items: center;
+
+padding: 0 11px;
+
+gap: 10px;
+
+border-radius: 7px;
+
+color: #bdbdbd;
+
+text-decoration: none;
+
+font-size: 13px;
+
+transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+
+}
+
+.nav-item:hover {
+background: #2a2a2a;
+
+
+color: #eeeeee;
+
+
+}
+
+.nav-item.active {
+background: #2b2b2b;
+
+
+color: #ffffff;
+
+
+}
+
+.nav-icon {
+width: 18px;
+
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+color: #858585;
+
+font-size: 16px;
+
+transition: color 0.15s ease;
+
+
+}
+
+.nav-item:hover .nav-icon {
+color: #bdbdbd;
+}
+
+.nav-item.active .nav-icon {
+color: #7c5cff;
+}
+
+/* =========================================================
+RECENT CHAT HISTORY
+========================================================= */
+
+.chat-history {
+display: flex;
+flex-direction: column;
+
+
+gap: 2px;
+
+max-height: 260px;
+
+overflow-y: auto;
+
+
+}
+
+.history-item {
+width: 100%;
+
+
+padding: 9px 11px;
+
+border-radius: 7px;
+
+color: #aaaaaa;
+
+font-size: 13px;
+
+white-space: nowrap;
+
+overflow: hidden;
+
+text-overflow: ellipsis;
+
+cursor: pointer;
+
+transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+
+}
+
+.history-item:hover {
+background: #2a2a2a;
+
+
+color: #d5d5d5;
+
+
+}
+
+.history-item.active {
+background: #2b2b2b;
+
+
+color: #eeeeee;
+
+
+}
+
+/* =========================================================
+SIDEBAR BOTTOM
+========================================================= */
+
+.sidebar-bottom {
+margin-top: auto;
+
+
+padding-top: 10px;
+
+border-top: 1px solid #292929;
+
+
+}
+
+/* =========================================================
+MINI PROFILE
+========================================================= */
+
+.profile-mini {
+width: 100%;
+
+
+min-height: 50px;
+
+display: flex;
+align-items: center;
+
+padding: 8px;
+
+border: none;
+border-radius: 8px;
+
+background: transparent;
+
+color: #eeeeee;
+
+font-family: inherit;
+
+text-align: left;
+
+cursor: pointer;
+
+transition: background 0.15s ease;
+
+
+}
+
+.profile-mini:hover {
+background: #2a2a2a;
+}
+
+/* =========================================================
+PROFILE AVATAR
+========================================================= */
+
+.mini-avatar {
+width: 31px;
+height: 31px;
+
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+flex-shrink: 0;
+
+margin-right: 10px;
+
+border-radius: 8px;
+
+background: #7c5cff;
+
+color: #ffffff;
+
+font-size: 12px;
+font-weight: 600;
+
+
+}
+
+/* =========================================================
+PROFILE INFORMATION
+========================================================= */
+
+.mini-user {
+min-width: 0;
+
+
+flex: 1;
+
+display: flex;
+flex-direction: column;
+
+
+}
+
+.mini-user strong {
+color: #dddddd;
+
+
+font-size: 12px;
+font-weight: 600;
+
+white-space: nowrap;
+
+overflow: hidden;
+
+text-overflow: ellipsis;
+
+
+}
+
+.mini-user span {
+margin-top: 2px;
+
+
+color: #707070;
+
+font-size: 10px;
+
+white-space: nowrap;
+
+overflow: hidden;
+
+text-overflow: ellipsis;
+
+
+}
+
+/* =========================================================
+PROFILE MENU
+========================================================= */
+
+.profile-arrow {
+color: #666666;
+
+
+font-size: 17px;
+
+transition: color 0.15s ease;
+
+
+}
+
+.profile-mini:hover .profile-arrow {
+color: #aaaaaa;
+}
+
+/* =========================================================
+SIDEBAR SCROLLBAR
+========================================================= */
+
+.chat-history::-webkit-scrollbar {
+width: 6px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+background: transparent;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+background: #3d3d3d;
+
+
+border-radius: 10px;
+
+
+}
+
+.chat-history::-webkit-scrollbar-thumb:hover {
+background: #505050;
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+
+.sidebar {
+    width: 220px;
+}
+
+
+}
+
+@media (max-width: 550px) {
+
+
+.sidebar {
+    display: none;
+}
+
+
+}

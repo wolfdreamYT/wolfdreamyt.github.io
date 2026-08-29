@@ -1,0 +1,195 @@
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+.settings-card {
+    margin-bottom: 20px;
+}
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.setting-item:first-child {
+    border-top: none;
+}
+
+.setting-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-left: 10px;
+}
+
+.setting-info strong {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.setting-info span {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.setting-control {
+    min-width: 180px;
+    padding-right: 10px;
+}
+
+.setting-control input,
+.setting-control select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    background: #202020;
+    color: #eee;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.setting-control input:focus,
+.setting-control select:focus {
+    border-color: #666;
+}
+
+.setting-value {
+    color: #999;
+    font-size: 13px;
+    padding-right: 10px;
+}
+
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+.toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+    padding-right: 10px;
+    right: 10px;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background: #333;
+    border-radius: 30px;
+    transition: 0.2s ease;
+    padding-right: 10px;
+}
+
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 3px;
+    background: #aaa;
+    border-radius: 50%;
+    transition: 0.2s ease;
+}
+
+.toggle input:checked + .toggle-slider {
+    background: #6c4cff;
+}
+
+.toggle input:checked + .toggle-slider::before {
+    transform: translateX(20px);
+    background: white;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.secondary-button {
+    padding: 9px 16px;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    background: #252525;
+    color: #eee;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    right: 10px;
+    position: relative;
+}
+
+.secondary-button:hover {
+    background: #303030;
+    border-color: #555;
+}
+
+.danger-setting {
+    border-top-color: rgba(255, 80, 80, 0.1);
+}
+
+.danger-button {
+    padding: 9px 16px;
+    border: 1px solid rgba(255, 80, 80, 0.25);
+    border-radius: 8px;
+    background: rgba(255, 60, 60, 0.08);
+    color: #ff7777;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    position: relative;
+    right: 10px;
+}
+
+.danger-button:hover {
+    background: rgba(255, 60, 60, 0.15);
+    border-color: rgba(255, 80, 80, 0.4);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .setting-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .setting-control {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .setting-item .toggle {
+        align-self: flex-end;
+    }
+
+}

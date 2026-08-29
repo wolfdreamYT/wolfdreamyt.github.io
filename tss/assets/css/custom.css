@@ -1,0 +1,24 @@
+select {
+    appearance: none;           /* Remove default arrow (Chrome, Safari, Edge) */
+    -webkit-appearance: none;   /* Remove default arrow (WebKit browsers) */
+    -moz-appearance: none;      /* Remove default arrow (Firefox) */
+    padding: 8px 40px 8px 12px; /* Add right padding for custom arrow space */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    position: relative;
+}
+
+/* Wrap the select in a container for positioning */
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* Custom arrow */
+.select-wrapper::after {
+    content: "▼"; /* Unicode down arrow */
+    position: relative;
+    right: 0px;  /* Move arrow 10px from the right edge */
+}

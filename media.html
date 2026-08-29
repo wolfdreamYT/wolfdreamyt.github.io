@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wolf Studios — Media</title>
+  <meta name="description" content="Wolf Studios Media — Videos, announcements, and updates.">
+  <link rel="icon" href="assets/images/icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="global1.css">
+  <link rel="stylesheet" href="global2.css">
+</head>
+
+<!-- ================= GOOGLE ANALYTICS ================= -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK5G059TRY"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+    gtag("config", "G-ZK5G059TRY");
+</script>
+<body>
+
+<!-- ================= BACKGROUND ================= -->
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+    <a href="/" class="brand">
+        <div class="brand-logo">
+          <img src="assets/images/logo.png" alt="Wolf Studios">
+        </div>
+
+        <div class="brand-text">
+            <span class="brand-name">Wolf Studios</span>
+            <span class="brand-tagline">Inventing products like animals.</span>
+        </div>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+          <a href="/Index.html">Home</a>
+          <a href="/browser.html">Browser</a>
+          <a href="/media.html">Media</a>
+          <a href="/chat.html">WAI2B</a>
+          <a id="discordRedirect" target="_blank">Support</a>
+          <a class="nav-contribute" id="youtubeRedirect" target="_blank">Youtube</a>
+    </nav>
+
+    <button class="mobile-menu-button" id="menuButton" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main>
+    <!-- ================= PAGE HEADER ================= -->
+    <section class="media-header">
+        <div class="eyebrow">
+            <span class="status-dot"></span>WOLF STUDIOS / MEDIA</div>
+        <h1>What's<span>happening.</span></h1>
+        <p>
+            Videos, updates, announcements, and other
+            things coming out of Wolf Studios.
+        </p>
+    </section>
+
+    <!-- ================= ANNOUNCEMENTS ================= -->
+    <section class="announcement-section">
+        <div class="section-heading">
+            <span class="section-number">01</span>
+            <div>
+                <span class="section-label">ANNOUNCEMENTS</span>
+                <h2>Announcements</h2>
+            </div>
+        </div>
+
+        <div class="announcement-card">
+            <div class="announcement-icon">1</div>
+            <div class="announcement-content">
+                <div class="announcement-top">
+                    <span class="announcement-badge">LATEST</span>
+                    <span class="announcement-date">AUG 2026</span>
+                </div>
+
+                <h3>Welcome to the new WolfStudios!</h3>
+                <p>
+                    We have redesigned the WolfStudios UI with
+                    much more complexity and styles! Check back for
+                    updates.
+                </p>
+            </div>
+            <div class="announcement-arrow">→</div>
+        </div>
+
+        <br>
+
+        <div class="announcement-card">
+            <div class="announcement-icon">2</div>
+            <div class="announcement-content">
+                <div class="announcement-top">
+                    <span class="announcement-badge">LATEST</span>
+                    <span class="announcement-date">AUG 2026</span>
+                </div>
+
+                <h3>JS TSS Engine</h3>
+                <p>
+                  We have created a JavaScript version of the TSS-1,
+                  allowing you to use our free demo models! Click to 
+                  try out the chatting platform!
+                </p>
+            </div>
+            <div class="announcement-arrow" id="chatRedirect">→</div>
+        </div>
+    </section>
+
+    <!-- ================= FEATURED VIDEO ================= -->
+    <section class="featured-section">
+        <div class="section-heading">
+            <span class="section-number">02</span>
+            <div>
+                <span class="section-label">FEATURED</span>
+                <h2>Latest Video</h2>
+            </div>
+        </div>
+
+        <div class="featured-video" id="featuredVideo" data-video-id="Hliq4ZQygrY">
+            <img src="https://i.ytimg.com/vi/Hliq4ZQygrY/maxresdefault.jpg" alt="Featured Wolf Studios video">
+            <div class="featured-overlay"></div>
+            <button class="featured-play" aria-label="Play featured video"><span>▶</span></button>
+            <div class="featured-info">
+                <span class="featured-label">WOLF STUDIOS / FEATURED</span>
+                <h3 id="featuredTitle">Loading video...</h3>
+                <p id="featuredAuthor">Wolf Studios</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= VIDEO LIBRARY ================= -->
+    <section class="media-library">
+        <div class="section-heading">
+            <span class="section-number">03</span>
+            <div>
+                <span class="section-label">VIDEO LIBRARY</span>
+                <h2>More Videos</h2>
+            </div>
+        </div>
+        <div class="media-grid" id="gallery"></div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="assets/images/logo.png" alt="Wolf Studios">
+                </div>
+                <div>
+                    <strong>Wolf Studios</strong>
+                    <p>Inventing products like animals.</p>
+                </div>
+            </div>
+            <div class="footer-links">
+
+                <a href="/#features">Privacy</a>
+                <a href="https://github.com/wolfdreamYT/wolfdreamyt.github.io/wiki/Contact" target="_blank">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>©<span id="year"></span>Wolf Studios</span>
+            <span>Created by Nicholas Machan.</span>
+        </div>
+    </footer>
+</main>
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+
+    /* =====================================================
+       VIDEO LIST
+    ===================================================== */
+
+    const initialVideos = [
+      "mQKNxZYBHLA",
+      "5DDvnK01Uro",
+      "THeOujMdHU0",
+      "5J6UitO0Ybw",
+      "d6zq3Re-8DI",
+      "UJ6QJyMJE38",
+      "Uxtf5-5oxDo",
+      "IE0kZnWZGjI",
+      "Hliq4ZQygrY",
+      "GUh33fiM0yw",
+      "ZUlFsSFpJyY",
+      "sZUcabinuRw",
+      "X9fNbmWlauI",
+      "lJZtWg0bUiE",
+      "3tGgOejb96k",
+      "KM4Fch10Yek",
+      "B-6xunFK5no",
+      "5iPQiQrwnig",
+      "9G-oHmjOG2U",
+      "T8haqsJrA00",
+      "Yf-fT51wVoQ",
+      "p_wpy3pXyeI",
+      "OkAkuC5slG0",
+      "Uxtf5-5oxDo",
+      "UJ6QJyMJE38"
+    ];
+
+    const gallery = document.getElementById("gallery");
+
+    /* =====================================================
+       YOUTUBE DATA
+    ===================================================== */
+
+    async function fetchVideoData(videoId) {
+      try {
+        const response = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+        const data = await response.json();
+        return { title: data.title, author: data.author_name };
+
+      } catch (error) {
+        return {
+          title: `Wolf Studios Video — ${videoId}`,
+          author: "Wolf Studios"
+        };
+      }
+    }
+
+    /* =====================================================
+       CREATE VIDEO CARD
+    ===================================================== */
+
+    async function makeCard(videoId) {
+      const data = await fetchVideoData(videoId);
+      const card = document.createElement("article");
+      card.className = "media-card";
+
+      /* Thumbnail */
+      const thumbnail = document.createElement("div");
+      thumbnail.className = "media-thumbnail";
+      thumbnail.dataset.videoId = videoId;
+      const image = document.createElement("img");
+
+      image.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+      image.alt = data.title;
+      image.loading = "lazy";
+
+      /* Play button */
+      const play = document.createElement("div");
+      play.className = "media-play";
+      play.innerHTML = "<span>▶</span>";
+
+      thumbnail.appendChild(image);
+      thumbnail.appendChild(play);
+
+      /* Card information */
+      const info = document.createElement("div");
+      info.className = "media-card-info";
+      const title = document.createElement("h3");
+      title.textContent = data.title;
+      const author = document.createElement("p");
+      author.textContent = data.author;
+
+      const link = document.createElement("a");
+      link.href = `https://www.youtube.com/watch?v=${videoId}`;
+
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Watch on YouTube →";
+
+      info.appendChild(title);
+      info.appendChild(author);
+      info.appendChild(link);
+      card.appendChild(thumbnail);
+      card.appendChild(info);
+
+      thumbnail.addEventListener("click", () => replaceWithIframe( thumbnail, videoId));
+      return card;
+    }
+
+    /* =====================================================
+       LOAD VIDEO
+    ===================================================== */
+
+    function replaceWithIframe(container, videoId) {
+      if (container.dataset.loaded === "1") {return;}
+
+      container.dataset.loaded = "1";
+      container.innerHTML = "";
+
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      iframe.loading = "lazy";
+      container.appendChild(iframe);
+    }
+
+    /* =====================================================
+       FEATURED VIDEO
+    ===================================================== */
+
+    const featured = document.getElementById("featuredVideo");
+
+    async function loadFeatured() {
+      const id = featured.dataset.videoId;
+      const data = await fetchVideoData(id);
+
+      document.getElementById("featuredTitle").textContent = data.title;
+      document.getElementById("featuredAuthor").textContent = data.author;
+
+      featured.addEventListener("click", () => {
+        if (featured.dataset.loaded === "1") {return;}
+
+        featured.dataset.loaded = "1";
+        featured.innerHTML = "";
+
+        const iframe = document.createElement( "iframe");
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        iframe.loading = "lazy";
+        featured.appendChild(iframe);
+      });
+    }
+
+
+    /* =====================================================
+       RENDER LIBRARY
+    ===================================================== */
+
+    async function renderVideos() {
+      gallery.innerHTML = "";
+      
+      for (const id of initialVideos.slice(1)) {
+        const card = await makeCard(id);
+        gallery.appendChild(card);
+      }
+    }
+
+    loadFeatured();
+    renderVideos();
+
+    /* =====================================================
+       YEAR
+    ===================================================== */
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    /* =====================================================
+       MOBILE NAVIGATION
+    ===================================================== */
+
+    const menuButton = document.getElementById("menuButton");
+    const mainNav = document.getElementById("mainNav");
+
+    if ( menuButton && mainNav ) {
+      menuButton.addEventListener("click", () => {
+        const opened = mainNav.classList.toggle( "open");
+        menuButton.setAttribute("aria-expanded", opened);
+      });
+
+      mainNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => { 
+          mainNav.classList.remove("open");
+          menuButton.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    /* =====================================================
+       SERVER AVAILABILITY
+    ===================================================== */
+
+    const POLL_INTERVAL = 1000;
+    const RESOURCE_URL = window.location.href;
+
+    async function checkServer() {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout( () => controller.abort(), 1500);
+        const response = await fetch( RESOURCE_URL, { cache: "no-store", signal: controller.signal});
+
+        clearTimeout(timeout);
+
+        if (!response.ok) {
+          throw new Error("Non-OK response");
+        }
+      } catch (error) {
+        console.warn("Server unreachable, refreshing page...");
+        location.reload();
+      }
+    }
+    setInterval(checkServer, POLL_INTERVAL);
+</script>
+
+<script src="/assets/js/redirects.js"></script>
+</body>
+</html>
+

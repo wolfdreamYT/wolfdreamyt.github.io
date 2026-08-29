@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WolfStudios - WAI Series</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <div id="loginPanel" class="login-panel">
+
+        <div class="login-box">
+            <button class="login-close" id="loginClose" aria-label="Close">×</button>
+            
+            <h2>Sign in</h2>
+            <input type="text" id="usernameInput" placeholder="Username" autocomplete="username">
+            <input type="password" id="passwordInput"placeholder="Password" autocomplete="current-password">
+            <button id="loginBtn">Sign in</button>
+
+            <p id="loginStatus"></p>
+        </div>
+    </div>
+
+    <div class="app">
+
+        <aside class="sidebar">
+            <div class="sidebar-logo">Wolf<span>AI</span></div>
+
+            <button class="new-chat" id="newChatBtn" onclick="location.href='index.html'">Go Home</button>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Version</div>
+
+                <div class="chat-history" id="chatHistory">
+                    <div class="history-item active">v1.1.53</div>
+                </div>
+            </div>
+
+            <br>
+
+            <button id="openLoginBtn" class="new-chat">Login to Existing Account</button>
+            <br>
+            <button id="openPurchaseBtn" class="new-chat">Obtain an Account</button>
+
+            <div class="model-section">
+
+                <label class="model-label">Free Models</label>
+                <select id="FreeModelSelect" class="model-select">
+
+                    <optgroup label="Free Models">
+                        <option value="/free-models/starter.json" data-conversation="/convo-models/starter.js">Pick a Model</option>
+                        <option value="/free-models/wai2e-3k-mini.json" data-conversation="/convo-models/wai2e-mini.js">WAI2E-3k-Mini</option>
+                        <option value="/free-models/wai2e-10k-cim.json" data-conversation="/convo-models/wai2e-cim.js">WAI2E-10k-CIM</option>
+                        <option value="/free-models/wai2b-20k-plic.json"data-conversation="/convo-models/wai2b-plic.js">WAI2B-20k-PLIC</option>
+                    </optgroup>
+                </select>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div class="topbar-title">WAI Series</div>
+                <div class="topbar-subtitle">WolfStudios AI</div>
+            </header>
+
+            <div class="chat-area" id="chatArea">
+                <div class="chat-content"></div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-inner">
+                    <div class="real-input-area">
+                        <div class="input-wrapper">
+                            <input type="text" id="searchInput" placeholder="Message WAI..." autocomplete="off">
+                        </div>
+                        <button id="searchBtn" title="Send">↑</button>
+                    </div>
+                    <div class="file-status" id="fileStatus"></div>
+                </div>
+            </div>
+        </main>
+
+
+        <div class="container">
+            <div class="chat-area" id="chatArea"></div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="jsonFileInput" accept=".json" class="hide">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/search-engine.js"></script>
+    <script type="module" src="/js/chatbot.js"></script>
+    <script src="/js/login.js"></script>
+</body>
+</html>

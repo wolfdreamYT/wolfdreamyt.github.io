@@ -1,0 +1,108 @@
+{
+    "source": "starter.txt",
+    "sentence_count": 6,
+    "sentences": [
+        {
+            "id": 0,
+            "text": "Please pick a proper model.",
+            "keywords": [
+                "please",
+                "pick",
+                "proper",
+                "model"
+            ],
+            "dates_times": null,
+            "people": null,
+            "locations": null,
+            "numbers": null,
+            "quotes": null,
+            "sentiment": "neutral",
+            "sentence_type": "imperative",
+            "topic_genre": null
+        },
+        {
+            "id": 1,
+            "text": "Hey, this isnt a model.",
+            "keywords": [
+                "hey",
+                "isnt",
+                "model"
+            ],
+            "dates_times": null,
+            "people": null,
+            "locations": null,
+            "numbers": null,
+            "quotes": null,
+            "sentiment": "neutral",
+            "sentence_type": "statement",
+            "topic_genre": null
+        },
+        {
+            "id": 2,
+            "text": "Hey!",
+            "keywords": [
+                "hey"
+            ],
+            "dates_times": null,
+            "people": null,
+            "locations": null,
+            "numbers": null,
+            "quotes": null,
+            "sentiment": "neutral",
+            "sentence_type": "exclamation",
+            "topic_genre": null
+        },
+        {
+            "id": 3,
+            "text": "you need to select a model.",
+            "keywords": [
+                "need",
+                "select",
+                "model"
+            ],
+            "dates_times": null,
+            "people": null,
+            "locations": null,
+            "numbers": null,
+            "quotes": null,
+            "sentiment": "neutral",
+            "sentence_type": "statement",
+            "topic_genre": null
+        },
+        {
+            "id": 4,
+            "text": "This model is currently a demo only.",
+            "keywords": [
+                "model",
+                "currently",
+                "demo"
+            ],
+            "dates_times": null,
+            "people": null,
+            "locations": null,
+            "numbers": null,
+            "quotes": null,
+            "sentiment": "neutral",
+            "sentence_type": "statement",
+            "topic_genre": null
+        },
+        {
+            "id": 5,
+            "text": "You cannot use a demo model for use.",
+            "keywords": [
+                "cannot",
+                "use",
+                "demo",
+                "model"
+            ],
+            "dates_times": null,
+            "people": null,
+            "locations": null,
+            "numbers": null,
+            "quotes": null,
+            "sentiment": "neutral",
+            "sentence_type": "statement",
+            "topic_genre": null
+        }
+    ]
+}
