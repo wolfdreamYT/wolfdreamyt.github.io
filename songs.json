@@ -1,0 +1,85 @@
+[
+  {
+    "title": "Choices",
+    "artist": "wolfdream",
+    "album": "The Singles",
+    "year": 2026,
+    "genre": "classic",
+    "duration": "24:14",
+    "catalogNumber": "CN-001",
+    "condition": "Mint",
+    "notes": "Limited Edition CD Burning Canada. Valuable collectors item if kept in good condition. Original Remix 26 only contained 2 Choices remixes, while this album 'The Singles' contains 6 tracks.",
+    "coverColor": "#3a2e5c",
+    "cover": "assets/the-singles.png",
+    "tracklist": [
+      { "number": 1, "title": "Choices (Official Audio)", "duration": "3:04" },
+      { "number": 2, "title": "Choices (Extended Version)", "duration": "5:27" },
+      { "number": 3, "title": "Choices (Video Mix)", "duration": "2:33" },
+      { "number": 4, "title": "Choices (Beat Mix)", "duration": "4:22" },
+      { "number": 5, "title": "Choices (Synth Mix)", "duration": "2:20" },
+      { "number": 6, "title": "Choices (Marc Mix)", "duration": "6:28" }
+    ]
+  },
+  {
+    "title": "Russia",
+    "artist": "wolfdream",
+    "album": "The Singles",
+    "year": 2026,
+    "genre": "synth",
+    "duration": "11:33",
+    "catalogNumber": "CN-002",
+    "condition": "Mint",
+    "notes": "Limited Edition CD Burning Canada. Only available through direct request. Only the Dance Mix was released to the 'Remix 26', however 'The Singles' contain all 4 tracks.",
+    "coverColor": "#5c2e2e",
+    "cover": "assets/the-singles.png",
+    "tracklist": [
+      { "number": 1, "title": "Russia (Vocals Mix)", "duration": "2:44" },
+      { "number": 2, "title": "Russia (Alt Mix)", "duration": "2:44" },
+      { "number": 3, "title": "Russia (Dance Mix)", "duration": "2:09" },
+      { "number": 4, "title": "Russia (Small Mix)", "duration": "3:56" }
+    ]
+  },
+  {
+    "title": "Nostalgia",
+    "artist": "wolfdream",
+    "album": "The Singles",
+    "year": 2026,
+    "genre": "classic",
+    "duration": "9:12",
+    "catalogNumber": "CN-003",
+    "condition": "Mint",
+    "notes": "Limited Edition CD Burning Canada. Includes a special hand-signed image cover. Only the 'Dance Mix' was released to 'Remix 26', and the Machan Mix was in production at the time.",
+    "coverColor": "#2e5c3a",
+    "cover": "assets/the-singles.png",
+    "tracklist": [
+      { "number": 1, "title": "Nostalgia (Video Mix)", "duration": "1:36" },
+      { "number": 2, "title": "Nostalgia (Machan Mix)", "duration": "2:28" },
+      { "number": 3, "title": "Nostalgia (Helium Mix)", "duration": "1:51" },
+      { "number": 4, "title": "Nostlagia (Dem Mix)", "duration": "3:17" }
+    ]
+  },
+  {
+    "title": "Greatest Hits Vol. 1",
+    "artist": "wolfdream",
+    "album": "Best Of 24-26",
+    "year": 2026,
+    "genre": "general",
+    "duration": "32:44",
+    "catalogNumber": "CN-004",
+    "condition": "Mint",
+    "notes": "Greatest Hits Vol. 1 Album. Limited Edition CD Burning Canada. Comes in a Limited Edition 2-CD Pack. This one contains all of the official audio/remasters of the singles, but there is no remixes included.",
+    "coverColor": "#5c4e2e",
+    "cover": "assets/BestOf24-26.png",
+    "tracklist": [
+      { "number": 1, "title": "Choices (Deluxe)", "duration": "2:33" },
+      { "number": 2, "title": "Nostalgia", "duration": "1:37" },
+      { "number": 3, "title": "Ascend", "duration": "5:37" },
+      { "number": 4, "title": "FrozenLand", "duration": "2:01" },
+      { "number": 5, "title": "Christmas Night", "duration": "4:30" },
+      { "number": 6, "title": "Consequences", "duration": "5:00" },
+      { "number": 7, "title": "Heather!", "duration": "2:38" },
+      { "number": 8, "title": "Tape 2 (Office 93)", "duration": "3:20" },
+      { "number": 9, "title": "Choices (Extended Version)", "duration": "5:28" }
+    ]
+  }
+]
