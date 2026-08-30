@@ -10,7 +10,7 @@
     "condition": "Mint",
     "notes": "Limited Edition CD Burning Canada. Valuable collectors item if kept in good condition. Original Remix 26 only contained 2 Choices remixes, while this album 'The Singles' contains 6 tracks.",
     "coverColor": "#3a2e5c",
-    "cover": "assets/the-singles.png",
+    "cover": "assets/images/the-singles.png",
     "tracklist": [
       { "number": 1, "title": "Choices (Official Audio)", "duration": "3:04" },
       { "number": 2, "title": "Choices (Extended Version)", "duration": "5:27" },
@@ -31,7 +31,7 @@
     "condition": "Mint",
     "notes": "Limited Edition CD Burning Canada. Only available through direct request. Only the Dance Mix was released to the 'Remix 26', however 'The Singles' contain all 4 tracks.",
     "coverColor": "#5c2e2e",
-    "cover": "assets/the-singles.png",
+    "cover": "assets/images/the-singles.png",
     "tracklist": [
       { "number": 1, "title": "Russia (Vocals Mix)", "duration": "2:44" },
       { "number": 2, "title": "Russia (Alt Mix)", "duration": "2:44" },
@@ -50,7 +50,7 @@
     "condition": "Mint",
     "notes": "Limited Edition CD Burning Canada. Includes a special hand-signed image cover. Only the 'Dance Mix' was released to 'Remix 26', and the Machan Mix was in production at the time.",
     "coverColor": "#2e5c3a",
-    "cover": "assets/the-singles.png",
+    "cover": "assets/images/the-singles.png",
     "tracklist": [
       { "number": 1, "title": "Nostalgia (Video Mix)", "duration": "1:36" },
       { "number": 2, "title": "Nostalgia (Machan Mix)", "duration": "2:28" },
@@ -69,7 +69,7 @@
     "condition": "Mint",
     "notes": "Greatest Hits Vol. 1 Album. Limited Edition CD Burning Canada. Comes in a Limited Edition 2-CD Pack. This one contains all of the official audio/remasters of the singles, but there is no remixes included.",
     "coverColor": "#5c4e2e",
-    "cover": "assets/BestOf24-26.png",
+    "cover": "assets/images/BestOf24-26.png",
     "tracklist": [
       { "number": 1, "title": "Choices (Deluxe)", "duration": "2:33" },
       { "number": 2, "title": "Nostalgia", "duration": "1:37" },
